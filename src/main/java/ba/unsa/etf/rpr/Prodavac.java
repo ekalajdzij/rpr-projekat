@@ -1,10 +1,10 @@
 package ba.unsa.etf.rpr;
 
 public class Prodavac {
-    Integer id;
-    String ime;
-    String telefon;
-    String mail;
+    private Integer id;
+    private String ime;
+    private String telefon;
+    private String mail;
 
     public Prodavac(Integer id, String ime, String telefon, String mail) {
         this.id = id;   this.ime = ime; this.telefon = telefon; this.mail = mail;
