@@ -7,10 +7,9 @@ public class Kupac {
     private String adresa;
     private String telefon;
     private Prodavac prodavac;
-    private Placanje placanje;
 
-    public Kupac(Integer id, String ime, String mail, String adresa, String telefon, Prodavac prodavac, Placanje placanje) {
-        this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;   this.placanje = placanje;
+    public Kupac(Integer id, String ime, String mail, String adresa, String telefon, Prodavac prodavac) {
+        this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;
     }
 
     @Override
@@ -22,17 +21,9 @@ public class Kupac {
                 ", adresa = "+ adresa +
                 ", telefon = " + telefon +
                 ", prodavac = " + prodavac.getIme() +
-                ", placeno = " + placanje.getIznos() +
                 '}';
     }
 
-    public Placanje getPlacanje() {
-        return placanje;
-    }
-
-    public void setPlacanje(Placanje placanje) {
-        this.placanje = placanje;
-    }
 
     public Prodavac getProdavac() {
         return prodavac;

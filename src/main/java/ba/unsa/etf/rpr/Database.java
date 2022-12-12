@@ -12,11 +12,13 @@ public class Database {
     private static String user;
     private static String password;
 
+
+
     private Database() {}
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
-            File f = new File("C:/Users/Emir/Desktop/baza.txt");
+            File f = new File("C:/Users/Emir/Desktop/properties.txt");
             Scanner scanner = new Scanner(f);
             url = scanner.nextLine();
             user = scanner.nextLine();
@@ -30,5 +32,7 @@ public class Database {
         connection = DriverManager.getConnection(url,user,password);
         return connection;
     }
+
+
 
 }
