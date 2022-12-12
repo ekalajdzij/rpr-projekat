@@ -15,11 +15,6 @@ public class PlacanjeDAOSQLImplementation implements DAO<Placanje>{
     }
 
     @Override
-    public int save(Placanje placanje) throws SQLException {
-        return 0;
-    }
-
-    @Override
     public int add(Placanje placanje) throws SQLException {
         return 0;
     }

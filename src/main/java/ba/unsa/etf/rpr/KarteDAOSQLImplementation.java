@@ -15,11 +15,6 @@ public class KarteDAOSQLImplementation implements KarteDAO{
     }
 
     @Override
-    public int save(Karte karte) throws SQLException {
-        return 0;
-    }
-
-    @Override
     public int add(Karte karte) throws SQLException {
         return 0;
     }

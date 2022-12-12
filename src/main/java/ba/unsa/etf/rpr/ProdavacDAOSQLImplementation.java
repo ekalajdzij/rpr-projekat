@@ -15,11 +15,6 @@ public class ProdavacDAOSQLImplementation implements ProdavacDAO{
     }
 
     @Override
-    public int save(Prodavac prodavac) throws SQLException {
-        return 0;
-    }
-
-    @Override
     public int add(Prodavac prodavac) throws SQLException {
         return 0;
     }

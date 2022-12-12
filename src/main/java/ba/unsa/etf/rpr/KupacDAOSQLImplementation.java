@@ -14,10 +14,6 @@ public class KupacDAOSQLImplementation implements DAO<Kupac>{
         return null;
     }
 
-    @Override
-    public int save(Kupac kupac) throws SQLException {
-        return 0;
-    }
 
     @Override
     public int add(Kupac kupac) throws SQLException {
