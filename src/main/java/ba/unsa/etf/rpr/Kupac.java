@@ -7,9 +7,10 @@ public class Kupac {
     private String adresa;
     private String telefon;
     private Prodavac prodavac;
+    private Karte karta;
 
-    public Kupac(Integer id, String ime, String mail, String adresa, String telefon, Prodavac prodavac) {
-        this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;
+    public Kupac(Integer id, String ime, String mail, String adresa, String telefon, Prodavac prodavac, Karte karta) {
+        this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;   this.karta = karta;
     }
 
     @Override
@@ -21,6 +22,7 @@ public class Kupac {
                 ", adresa = "+ adresa +
                 ", telefon = " + telefon +
                 ", prodavac = " + prodavac.getIme() +
+                ", karta = " + karta.getVrsta()+ ", datum: " + karta.getDatum() + "u: " + karta.getAdresa() +
                 '}';
     }
 
@@ -71,5 +73,13 @@ public class Kupac {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Karte getKarta() {
+        return karta;
+    }
+
+    public void setKarta(Karte karta) {
+        this.karta = karta;
     }
 }

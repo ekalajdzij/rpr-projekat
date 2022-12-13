@@ -29,7 +29,7 @@ public class ProdavacDAOSQLImplementation implements ProdavacDAO{
         Connection con = Database.getConnection();                //povezemo se sa bazom
         String sql = "SELECT id, ime, telefon, mail FROM Prodavac";//nas sql upit
         List<Prodavac> prodavci = new ArrayList<>();                //napravimo listu tipa Prodavac
-        Statement stmt = con.createStatement();                     //formiramo preparedstatement & izvrsimo upit
+        Statement stmt = con.createStatement();                     //formiramo statement & izvrsimo upit
         ResultSet rs = stmt.executeQuery(sql);
 
         while (rs.next()) {
