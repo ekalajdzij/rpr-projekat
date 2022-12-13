@@ -23,15 +23,44 @@ public class App
 
         ProdavacDAO p111DAO = new ProdavacDAOSQLImplementation();
         List<Prodavac> pr111 = p111DAO.getAll();
+
+        //Prodavac Update:
         ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
         Prodavac prodavac = new Prodavac(2,"kkk","+381 666 222","lll");
         prodavacDAO.update(prodavac);
         System.out.println(prodavac);
-         */
+        //ProdavacDelete
         ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
         Prodavac prodavac = prodavacDAO.getById(2);
         System.out.println(prodavac);
         int rez = prodavacDAO.delete(prodavac);
+
+
+        KupacDAO  kupacDAO = new KupacDAOSQLImplementation();
+        Kupac kupac = kupacDAO.getById(1);
+        System.out.println(kupac); */
+        ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
+        Prodavac prodavac = prodavacDAO.getById(3);
+        System.out.println(prodavac);
+
+        //Kupac Add:
+        /*KupacDAO kDAO = new KupacDAOSQLImplementation();
+        Kupac novi = new Kupac(3,"Dilion Hose", "+387 62 333 111", "damirh@hotmail.at.de", "+387 61 666 999", prodavac);
+        int pr = kDAO.add(novi);
+        System.out.println(pr);
+
+        //Kupac Update:
+        KupacDAO kupacDAO = new KupacDAOSQLImplementation();
+        Kupac kupac = new Kupac(3,"Dilion James", "dillionjames@mail.look", "New York City, New York", "+91 666 222", prodavac);
+        kupacDAO.update(kupac);
+        System.out.println(kupac);
+
+        KupacDAO kDAO = new KupacDAOSQLImplementation();
+        Kupac novi = new Kupac(4,"James Artur", "jamesarthuuur9@gmail.outlook.uk.co", "Oxford Street, London", "+42 333 33 66", prodavac);
+        int pr = kDAO.add(novi);
+        System.out.println(pr);
+
+        //Kupac Delete: */
 
 
 
