@@ -2,9 +2,7 @@ package ba.unsa.etf.rpr;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Database {
@@ -13,8 +11,9 @@ public class Database {
     private static String password;
 
 
+    private Database() {
+    }
 
-    private Database() {}
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
@@ -24,15 +23,43 @@ public class Database {
             user = scanner.nextLine();
             password = scanner.nextLine();
             scanner.close();
-        }
-        catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Došlo je do nekog problema");
             e.printStackTrace();
         }
-        connection = DriverManager.getConnection(url,user,password);
+        connection = DriverManager.getConnection(url, user, password);
         return connection;
     }
 
+    public static void closeConnection(Connection connection) {
+        try {
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void closeStatement(Statement stmt) {
+        try {
+            if (stmt != null) stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void closePreparedStatement(PreparedStatement stmt) {
+        try {
+            if (stmt != null) stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void closeResultSet(ResultSet result) {
+        try {
+            if (result != null) result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,6 +8,6 @@ public interface DAO<T> {
     List<T> getAll() throws SQLException;
     int add(T t) throws SQLException;
     int update(T t) throws SQLException;
-    int delete(T t);
+    int delete(T t) throws SQLException;
 
 }
