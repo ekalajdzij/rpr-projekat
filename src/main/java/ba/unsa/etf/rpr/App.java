@@ -54,14 +54,44 @@ public class App
         Kupac kupac = new Kupac(3,"Dilion James", "dillionjames@mail.look", "New York City, New York", "+91 666 222", prodavac);
         kupacDAO.update(kupac);
         System.out.println(kupac);
-
+        //Kupac Add:
         KupacDAO kDAO = new KupacDAOSQLImplementation();
         Kupac novi = new Kupac(4,"James Artur", "jamesarthuuur9@gmail.outlook.uk.co", "Oxford Street, London", "+42 333 33 66", prodavac);
         int pr = kDAO.add(novi);
         System.out.println(pr);
 
-        //Kupac Delete: */
+        //Karte Delete:
+        KarteDAO karteDAO = new KarteDAOSQLImplementation();
+        Karte karte = karteDAO.getById(4);
+        System.out.println(karte);
+        int rez = karteDAO.delete(karte);
+        System.out.println(rez); */
 
+        //Kupac Delete:
+        /*KupacDAO kupacDAO = new KupacDAOSQLImplementation();
+        Kupac kupac  = kupacDAO.getById(1);
+        System.out.println(kupac);
+        int rez = kupacDAO.delete(kupac);*/
+
+        //Karte Update:
+        /*KarteDAO karteDAO = new KarteDAOSQLImplementation();
+        Karte karta = new Karte(1,"Film", "13.10.2022", "Cinestar, New York", prodavac, 33.5);
+        karteDAO.update(karta);
+        System.out.println(karta);*/
+
+        //Kupac Add:
+        /*KarteDAO kDAO = new KarteDAOSQLImplementation();
+        Karte nova = new Karte(3,"Prevoz", "10.10.2021", "Ilidza-Sarajevo", prodavac, 3.5);
+        int pr = kDAO.add(nova);
+        System.out.println(pr);*/
+
+        KupacDAO kupacDAO = new KupacDAOSQLImplementation();
+        Kupac k = kupacDAO.getById(1);
+        System.out.println(k);
+
+        KupacDAO kuupacDAO = new KupacDAOSQLImplementation();
+        Kupac ku = kuupacDAO.getById(3);
+        System.out.println(ku);
 
 
 
