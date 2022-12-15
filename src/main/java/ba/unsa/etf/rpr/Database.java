@@ -1,8 +1,8 @@
 package ba.unsa.etf.rpr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.sql.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Database {
@@ -16,16 +16,16 @@ public class Database {
 
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
-        try {
-            File f = new File("C:/Users/Emir/Desktop/properties.txt");
-            Scanner scanner = new Scanner(f);
-            url = scanner.nextLine();
-            user = scanner.nextLine();
-            password = scanner.nextLine();
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Došlo je do nekog problema");
-            e.printStackTrace();
+        try (InputStream input = new FileInputStream("login.properties")) {
+
+            Properties prop = new Properties();
+            prop.load(input);
+            url = prop.getProperty("db.url");
+            user = prop.getProperty("db.user");
+            password = prop.getProperty("db.password");
+
+        } catch (IOException io) {
+            io.printStackTrace();
         }
         connection = DriverManager.getConnection(url, user, password);
         return connection;
