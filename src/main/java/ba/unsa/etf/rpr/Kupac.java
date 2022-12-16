@@ -27,6 +27,7 @@ public class Kupac {
     }
 
 
+
     public Prodavac getProdavac() {
         return prodavac;
     }

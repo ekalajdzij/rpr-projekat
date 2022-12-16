@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+
+<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.PocetnaController">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Label prefHeight="18.0" prefWidth="182.0" text="Cijena" GridPane.rowIndex="1" />
+      <TextField fx:id="fieldCijena" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="zatvoriButtonClick" mnemonicParsing="false" onAction="#zButtonClick" prefHeight="26.0" prefWidth="334.0" text="Zatvori" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <Label fx:id="hvalaLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="27.0" prefWidth="335.0" text="Hvala Vam na kupovini i povjerenju" GridPane.columnSpan="2">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <font>
+            <Font name="Algerian" size="16.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.6167401385202282" centerY="0.9393939384908387" cycleMethod="REFLECT" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006729475100942127">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5169878212914026">
+                     <color>
+                        <Color red="0.21016141772270203" green="0.06560000032186508" blue="0.8199999928474426" opacity="0.6000000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.915208613728129">
+                     <color>
+                        <Color red="0.949999988079071" green="0.05700000002980232" blue="0.05700000002980232" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.949999988079071" green="0.05700000002980232" blue="0.05700000002980232" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</GridPane>
