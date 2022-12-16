@@ -95,4 +95,9 @@ public class KarteDAOSQLImplementation implements KarteDAO{
 
 
     }
+
+    @Override
+    public int getId(String karte) throws SQLException {
+        return 0;
+    }
 }

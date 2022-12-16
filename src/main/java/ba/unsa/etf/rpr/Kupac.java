@@ -22,7 +22,7 @@ public class Kupac {
                 ", adresa = "+ adresa +
                 ", telefon = " + telefon +
                 ", prodavac = " + prodavac.getIme() +
-                ", karta = " + karta.getVrsta()+ ", datum: " + karta.getDatum() + "u: " + karta.getAdresa() +
+                ", karta = " + karta.getVrsta()+ ", datum: " + karta.getDatum() + " u: " + karta.getAdresa() +
                 '}';
     }
 

@@ -102,4 +102,18 @@ public class KupacDAOSQLImplementation implements KupacDAO{
         return rez;
 
     }
+
+    @Override
+    public int getId(String ime) throws SQLException {
+        Connection connection = Database.getConnection();
+        String sql = "SELECT id FROM Kupac WHERE ime = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1,ime);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            int id = rs.getInt("id");
+            return id;
+        }
+        return -1;
+    }
 }
