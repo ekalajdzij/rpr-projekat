@@ -10,15 +10,20 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.PocetnaController">
+<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.KupovinaController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
         <Label contentDisplay="CENTER" text="Ime korisnika:">
@@ -32,8 +37,26 @@
                 <Font size="13.0" />
             </font>
         </Label>
-        <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginButtonClick" prefHeight="26.0" prefWidth="202.0" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+        <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginButtonClick" prefHeight="26.0" prefWidth="18.0" text="Login" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
         <PasswordField fx:id="fieldPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Mail" GridPane.rowIndex="2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldMail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Adresa" GridPane.rowIndex="3">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label text="Telefon" GridPane.rowIndex="4">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldAdresa" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="fieldTelefon" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </children>
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

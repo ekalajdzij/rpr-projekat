@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,9 +94,41 @@ public class KarteDAOSQLImplementation implements KarteDAO{
 
 
     }
+    @Override
+    public List<String> getAllKarte() throws SQLException {
+        KarteDAO kDA0 = new KarteDAOSQLImplementation();
+        List<String> lista = new ArrayList<>();
+        List<Karte> list = kDA0.getAll();
+        for (Karte x : list)
+            lista.add(x.getVrsta());
+        return lista;
+    }
 
     @Override
-    public int getId(String karte) throws SQLException {
-        return 0;
+    public int dajIdKarte(String vrsta) throws SQLException {
+        Connection connection = Database.getConnection();
+        String sql = "SELECT id FROM Karte WHERE vrsta = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1,vrsta);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            int id = rs.getInt("id");
+            return id;
+        }
+        return -1;
+    }
+
+    @Override
+    public int dajIdProdavcaKarte(String vrsta) throws SQLException {
+        Connection connection = Database.getConnection();
+        String sql = "SELECT Prodavac_id FROM Karte WHERE vrsta = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1,vrsta);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            int id = rs.getInt("Prodavac_id");
+            return id;
+        }
+        return -1;
     }
 }

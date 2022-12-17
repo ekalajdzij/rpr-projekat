@@ -88,8 +88,6 @@ public class ProdavacDAOSQLImplementation implements ProdavacDAO{
 
 
     }
-
-    @Override
     public int getId(String ime) throws SQLException {
         Connection connection = Database.getConnection();
         String sql = "SELECT id FROM Prodavac WHERE ime = ?";

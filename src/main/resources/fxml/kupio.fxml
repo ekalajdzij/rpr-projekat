@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.PocetnaController">
+<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.KupovinaController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />

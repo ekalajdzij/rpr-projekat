@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static javafx.application.Application.launch;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -23,7 +24,7 @@ public class App extends Application{
         }
 
         public static void main(String[] args) throws SQLException {
-            launch();
+            //launch();
             //KupacDAO kDAO = new KupacDAOSQLImplementation();
             //Kupac k = kDAO.getById(0);
             //System.out.println(k);
@@ -38,6 +39,13 @@ public class App extends Application{
             KupacDAO kDAO = new KupacDAOSQLImplementation();
             int idd = kDAO.getId("Karim Smith");
             Kupac k = kDAO.getById(idd);
-            System.out.println(k);*/
+            System.out.println(k);
+            KarteDAO k = new KarteDAOSQLImplementation();
+            List<String> l = k.getAllKarte();
+            for (String x : l) System.out.println(x);
+            KarteDAO k = new KarteDAOSQLImplementation();
+            int in = k.dajIdKarte("Film");
+            int pid = k.dajIdProdavcaKarte("Film");
+            System.out.println(pid);*/
         }
 }
