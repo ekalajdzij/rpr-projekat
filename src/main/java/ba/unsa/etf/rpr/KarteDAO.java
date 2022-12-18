@@ -10,4 +10,6 @@ public interface KarteDAO extends DAO<Karte>{
 
     int dajIdProdavcaKarte(String vrsta) throws SQLException;
 
+    Double dajCijenu(int id) throws SQLException;
+
 }

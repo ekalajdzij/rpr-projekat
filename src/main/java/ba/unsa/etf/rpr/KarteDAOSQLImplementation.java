@@ -131,4 +131,17 @@ public class KarteDAOSQLImplementation implements KarteDAO{
         }
         return -1;
     }
+    @Override
+    public Double dajCijenu(int id) throws SQLException {
+        Connection connection = Database.getConnection();
+        String sql = "SELECT cijena FROM Karte WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1,id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Double ciena = rs.getDouble("cijena");
+            return ciena;
+        }
+        return Double.valueOf(-1);
+    }
 }

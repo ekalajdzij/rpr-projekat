@@ -13,6 +13,9 @@ public class Kupac {
         this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;   this.karta = karta;
     }
 
+    public Kupac() {
+    }
+
     @Override
     public String toString() {
         return "Kupac{" +
