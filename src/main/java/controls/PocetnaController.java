@@ -12,6 +12,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class PocetnaController {
     public Button kupovinaButton;
+    public Button prodajaButton;
 
     public void kupovinaButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -26,5 +27,9 @@ public class PocetnaController {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void prodajaButtonClick(ActionEvent actionEvent) {
+        
     }
 }
