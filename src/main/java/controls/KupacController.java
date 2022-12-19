@@ -20,7 +20,10 @@ public class KupacController {
     public TextField fieldMail;
     public TextField fieldAdresa;
     public TextField fieldTelefon;
-    public KupacController() throws SQLException {
+    private String vrsta_odabrane_karte;
+    private Integer kolicina;
+    public KupacController(String opcija, Integer kolicina) {
+        this.vrsta_odabrane_karte = opcija; this.kolicina = kolicina;
     }
 
     public void loginButtonClick(ActionEvent actionEvent) throws IOException, SQLException {
@@ -45,29 +48,20 @@ public class KupacController {
             String mail = fieldMail.getText();
             String telefon = fieldTelefon.getText();
             String adresa = fieldAdresa.getText();
-            KarteController b = new KarteController();
 
-            String vrsta_odabrane_karte = b.getVrsta_karte();
 
             if (kDAO.getId(ime) == -1) {
 
                 KarteDAO karteDAO = new KarteDAOSQLImplementation();
                 int id_karte = karteDAO.dajIdKarte(vrsta_odabrane_karte);
-                Karte karta = karteDAO.getById(1);
+                Karte karta = karteDAO.getById(id_karte);
 
                 ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
                 int id_prodavca = karteDAO.dajIdProdavcaKarte(vrsta_odabrane_karte);
                 Prodavac prodavac = pDAO.getById(id_prodavca);
-
-                //k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
                 Kupac k = new Kupac();
-                k.setId(0);
-                k.setIme(ime);
-                k.setMail(mail);
-                k.setAdresa(adresa);
-                k.setTelefon(telefon);
-                k.setProdavac(prodavac);
-                k.setKarta(karta);
+
+                k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
                 kDAO.add(k);
             }
         }
