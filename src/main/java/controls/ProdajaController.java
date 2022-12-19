@@ -2,11 +2,17 @@ package controls;
 
 import ba.unsa.etf.rpr.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ProdajaController {
 
@@ -21,7 +27,7 @@ public class ProdajaController {
         this.ime = ime;
     }
 
-    public void okButtonClick(ActionEvent actionEvent) throws SQLException {
+    public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
         if (fieldCijena.getText().isEmpty() || fieldVrsta.getText().isEmpty() || fieldDatum.getText().isEmpty() || fieldAdresa.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -44,6 +50,14 @@ public class ProdajaController {
 
             Karte k = new Karte(0,vrsta,datum,adresa,prodavac,cijena);
             kDAO.add(k);
+
+            Stage stage = new Stage();
+            FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/ubaciokartu.fxml"));
+            Scene scene = new Scene(fxmlloader.load(), 400, 200);
+            stage.setTitle("");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
         }
 
     }

@@ -28,9 +28,9 @@ public class KupioController {
         fieldCijena.setText(pomocni_string);
     }
     public void zatvoriButtonClick(ActionEvent actionEvent) {
-        //System.out.println(vrsta_odabrane_karte +" " +kolicina + " " + fieldCijena.getText());
-        //Stage stage = (Stage) hvalaLabel.getScene().getWindow();
-        //stage.close();
+
+        Stage stage = (Stage) hvalaLabel.getScene().getWindow();
+        stage.close();
 
     }
 }

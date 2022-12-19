@@ -29,7 +29,17 @@ public class PocetnaController {
 
     }
 
-    public void prodajaButtonClick(ActionEvent actionEvent) {
-        
+    public void prodajaButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/prodavac.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        stage.setMinHeight(250);
+        stage.setMaxHeight(350);
+        stage.setMaxWidth(450);
+        stage.setMinWidth(350);
+        stage.setTitle("Podaci");
+        //stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 }
