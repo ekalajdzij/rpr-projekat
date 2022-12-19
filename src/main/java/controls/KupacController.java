@@ -49,21 +49,17 @@ public class KupacController {
             String telefon = fieldTelefon.getText();
             String adresa = fieldAdresa.getText();
 
+            KarteDAO karteDAO = new KarteDAOSQLImplementation();
+            int id_karte = karteDAO.dajIdKarte(vrsta_odabrane_karte);
+            Karte karta = karteDAO.getById(id_karte);
 
-            if (kDAO.getId(ime) == -1) {
+            ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
+            int id_prodavca = karteDAO.dajIdProdavcaKarte(vrsta_odabrane_karte);
+            Prodavac prodavac = pDAO.getById(id_prodavca);
 
-                KarteDAO karteDAO = new KarteDAOSQLImplementation();
-                int id_karte = karteDAO.dajIdKarte(vrsta_odabrane_karte);
-                Karte karta = karteDAO.getById(id_karte);
-
-                ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
-                int id_prodavca = karteDAO.dajIdProdavcaKarte(vrsta_odabrane_karte);
-                Prodavac prodavac = pDAO.getById(id_prodavca);
-                Kupac k = new Kupac();
-
-                k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
-                kDAO.add(k);
-            }
+            Kupac k = new Kupac();
+            k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
+            kDAO.add(k);
         }
 
     }

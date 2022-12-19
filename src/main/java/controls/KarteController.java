@@ -41,7 +41,7 @@ public class KarteController {
     public void okButtonClick(ActionEvent actionEvent) throws IOException {
         if (choiceBox.getValue() == null || fieldKolicina.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
+            alert.setTitle("Pogreška");
             alert.setHeaderText("Greška pri unosu podataka! ");
             alert.setContentText("Molimo Vas unesite podatke o kupovini ponovo!");
             alert.showAndWait();
