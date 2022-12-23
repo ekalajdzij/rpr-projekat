@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class KupioController {
     public Label fieldCijena = new Label();
     public Button zatvoriButtonClick;
-    public Label hvalaLabel;
     private String vrsta_odabrane_karte;
     private Integer kolicina;
     private String cijena;
@@ -29,7 +28,7 @@ public class KupioController {
     }
     public void zatvoriButtonClick(ActionEvent actionEvent) {
 
-        Stage stage = (Stage) hvalaLabel.getScene().getWindow();
+        Stage stage = (Stage) fieldCijena.getScene().getWindow();
         stage.close();
 
     }

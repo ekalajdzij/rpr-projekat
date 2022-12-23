@@ -60,7 +60,7 @@ public class KupacController {
             fxmlloader.setController(kupioController);
 
             Scene scene = new Scene(fxmlloader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("Hvala");
+            stage.setTitle("");
             stage.setScene(scene);
             stage.show();
         }
