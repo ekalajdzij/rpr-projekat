@@ -22,28 +22,28 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
+      <version>5.9.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-xml</artifactId>
-      <version>2.11.1</version>
+      <version>2.14.0</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.13.3</version>
+      <version>2.14.0</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.13.3</version>
+      <version>2.14.0</version>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
-      <version>1.9.5</version>
+      <version>1.10.19</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>12.0.2</version>
+      <version>19</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17.0.2</version>
+      <version>19</version>
     </dependency>
 
 
@@ -88,10 +88,6 @@
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -124,20 +120,7 @@
           <artifactId>javafx-maven-plugin</artifactId>
           <version>0.0.8</version>
           <configuration>
-            <mainClass>rpr-projekat/ba.unsa.etf.rpr.App</mainClass>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <configuration>
-            <archive>
-              <manifest>
-                <mainClass>
-                  ba.unsa.etf.rpr.Main
-                </mainClass>
-              </manifest>
-            </archive>
+            <mainClass>ba.unsa.etf.rpr.App</mainClass>
           </configuration>
         </plugin>
       </plugins>

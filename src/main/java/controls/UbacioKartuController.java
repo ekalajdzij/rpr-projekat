@@ -12,7 +12,7 @@ public class UbacioKartuController {
 
     @FXML
     void initialize() throws FileNotFoundException {
-        Image image = new Image(new FileInputStream("C:/Users/Emir/Pictures/Saved Pictures/checkpoint.jpg"));
+        Image image = new Image(new FileInputStream("src/main/resources/checkpoint.jpg"));
         fieldImage.setImage(image);
     }
 
