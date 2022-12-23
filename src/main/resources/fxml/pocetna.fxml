@@ -1,62 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" prefHeight="297.0" prefWidth="515.0" vgap="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.PocetnaController">
+<GridPane fx:id="pocetnaStranica" alignment="center" prefHeight="400.0" prefWidth="800.0" vgap="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.PocetnaController">
+   <stylesheets>
+      <URL value="@pocetna.css" />
+   </stylesheets>
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
+      <ColumnConstraints minWidth="10.0" prefWidth="300.0" />
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
       <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="24.79998779296875" />
-      <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="15.20001220703125" />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button fx:id="kupovinaButton" mnemonicParsing="false" onAction="#kupovinaButtonClick" prefHeight="26.0" prefWidth="206.0" text="Kupovina karata" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button fx:id="prodajaButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#prodajaButtonClick" prefHeight="26.0" prefWidth="205.0" text="Prodaja karata" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label alignment="CENTER" minWidth="-Infinity" prefHeight="58.0" prefWidth="202.0" text="Dobrodošli" textAlignment="CENTER" underline="true" GridPane.columnIndex="1">
+      <Button fx:id="kupovinaButton" mnemonicParsing="false" onAction="#kupovinaButtonClick" prefHeight="26.0" prefWidth="207.0" text="Kupovina karata" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
          <font>
-            <Font name="Algerian" size="24.0" />
+            <Font name="Century Gothic" size="12.0" />
+         </font></Button>
+      <Button fx:id="prodajaButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#prodajaButtonClick" prefHeight="36.0" prefWidth="206.0" text="Prodaja karata" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font name="Century Gothic" size="12.0" />
+         </font></Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefHeight="58.0" prefWidth="207.0" text="Dobrodošli" textAlignment="CENTER" textFill="#ececec" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font name="Century Gothic" size="37.0" />
          </font>
-         <textFill>
-            <RadialGradient centerX="0.47356826513349226" centerY="0.4659090692346746" cycleMethod="REFLECT" radius="0.5">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.9700000286102295" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.15633249282836914" blue="0.9700000286102295" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </textFill>
       </Label>
+      <ImageView fx:id="fieldImage" fitHeight="177.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="TOP" GridPane.vgrow="SOMETIMES">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <cursor>
+            <Cursor fx:constant="SE_RESIZE" />
+         </cursor>
+      </ImageView>
    </children>
 </GridPane>

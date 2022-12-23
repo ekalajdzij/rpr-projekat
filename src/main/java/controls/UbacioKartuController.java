@@ -10,10 +10,10 @@ import java.io.FileNotFoundException;
 public class UbacioKartuController {
     public ImageView fieldImage;
 
-    @FXML
+   /* @FXML
     void initialize() throws FileNotFoundException {
         Image image = new Image(new FileInputStream("src/main/resources/checkpoint.jpg"));
         fieldImage.setImage(image);
-    }
+    }*/
 
 }

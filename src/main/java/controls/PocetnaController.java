@@ -1,18 +1,30 @@
 package controls;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class PocetnaController {
+    public ImageView fieldImage;
     public Button kupovinaButton;
     public Button prodajaButton;
+        @FXML
+    void initialize() throws FileNotFoundException {
+        Image image = new Image(new FileInputStream("src/main/resources/ticket.png"));
+        fieldImage.setImage(image);
+    }
 
     public void kupovinaButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();

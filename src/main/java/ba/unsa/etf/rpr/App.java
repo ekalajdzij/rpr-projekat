@@ -1,11 +1,14 @@
 package ba.unsa.etf.rpr;
 
 import controls.JavaFXKlasa;
+import controls.PocetnaController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -18,8 +21,10 @@ public class App extends Application{
             FXMLLoader fxmlLoader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/pocetna.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle("");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
+
         }
         public static void main(String[] args) throws SQLException {
             launch();
