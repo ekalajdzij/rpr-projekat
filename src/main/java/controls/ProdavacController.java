@@ -26,7 +26,7 @@ public class ProdavacController {
 
     public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
 
-        if (fieldIme.getText().isEmpty() || fieldTelefon.getText().isEmpty() || fieldMail.getText().isEmpty()) {
+        if (fieldIme.getText().isEmpty() || fieldTelefon.getText().isEmpty() || fieldMail.getText().isEmpty() || !fieldMail.getText().contains("@")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Greška pri unosu podataka! ");
