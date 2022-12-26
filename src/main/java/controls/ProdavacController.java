@@ -26,11 +26,18 @@ public class ProdavacController {
 
     public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
 
-        if (fieldIme.getText().isEmpty() || fieldTelefon.getText().isEmpty() || fieldMail.getText().isEmpty() || !fieldMail.getText().contains("@")) {
+        if (fieldIme.getText().isEmpty() || fieldTelefon.getText().isEmpty() || fieldMail.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Greška pri unosu podataka! ");
             alert.setContentText("Molimo Vas unesite vaše podatke ponovo!");
+            alert.showAndWait();
+        }
+        else if(!fieldMail.getText().contains("@")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unijeli ste neispravnu mail adresu! ");
+            alert.setContentText("Molimo Vas unesite vašu mail adresu ponovo!");
             alert.showAndWait();
         } else {
             String ime = fieldIme.getText();

@@ -34,7 +34,7 @@ public class ProdajaController {
             alert.setHeaderText("Greška pri unosu podataka! ");
             alert.setContentText("Molimo Vas unesite podatke vaše karte ponovo!");
             alert.showAndWait();
-        } else {
+        }else {
             String pomocni = fieldCijena.getText();
             Double cijena = Double.parseDouble(pomocni);
             String vrsta = fieldVrsta.getText();

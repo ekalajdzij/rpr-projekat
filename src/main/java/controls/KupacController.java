@@ -34,6 +34,13 @@ public class KupacController {
             alert.setContentText("Molimo Vas unesite vaše podatke ponovo!");
             alert.showAndWait();
         }
+        else if(!fieldMail.getText().contains("@")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unijeli ste neispravnu mail adresu! ");
+            alert.setContentText("Molimo Vas unesite vašu mail adresu ponovo!");
+            alert.showAndWait();
+        }
         else {
             Connection connection = Database.getConnection();
             KupacDAO kDAO = new KupacDAOSQLImplementation();
