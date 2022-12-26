@@ -50,7 +50,7 @@ public class PocetnaController {
         stage.setMaxWidth(450);
         stage.setMinWidth(350);
         stage.setTitle("Podaci");
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
