@@ -53,7 +53,7 @@ public class ProdajaController {
 
             Stage stage = new Stage();
             FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/ubaciokartu.fxml"));
-            Scene scene = new Scene(fxmlloader.load(), 400, 200);
+            Scene scene = new Scene(fxmlloader.load(), 500, 250);
             stage.setTitle("");
             stage.setScene(scene);
             stage.setResizable(false);
