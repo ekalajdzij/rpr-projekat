@@ -49,6 +49,10 @@ public class ProdavacController {
 
             Scene scene = new Scene(fxmlloader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle("Podaci");
+            stage.setMaxHeight(400);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(250);
+            stage.setMinWidth(500);
             stage.setScene(scene);
             stage.show();
         }
