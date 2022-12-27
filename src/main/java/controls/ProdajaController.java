@@ -1,6 +1,8 @@
 package controls;
 
 import ba.unsa.etf.rpr.*;
+import ba.unsa.etf.rpr.domain.Karte;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +13,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ProdajaController {
 

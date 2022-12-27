@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.domain.Karte;
+import ba.unsa.etf.rpr.domain.Kupac;
+import ba.unsa.etf.rpr.domain.Prodavac;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

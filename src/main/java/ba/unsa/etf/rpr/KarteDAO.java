@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.domain.Karte;
+
 import java.sql.SQLException;
 import java.util.List;
 

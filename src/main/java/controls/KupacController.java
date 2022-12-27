@@ -1,6 +1,9 @@
 package controls;
 
 import ba.unsa.etf.rpr.*;
+import ba.unsa.etf.rpr.domain.Karte;
+import ba.unsa.etf.rpr.domain.Kupac;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

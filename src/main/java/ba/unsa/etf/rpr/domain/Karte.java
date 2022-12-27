@@ -1,14 +1,14 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.domain;
 
-public class Karte {
-    private Integer id;
+public class Karte implements Idable{
+    private int id;
     private String vrsta;
     private String datum;
     private String adresa;
     private Prodavac prodavac;
     private Double cijena;
 
-    public Karte(Integer id, String vrsta, String datum, String adresa, Prodavac prodavac_id, Double cijena ) {
+    public Karte(int id, String vrsta, String datum, String adresa, Prodavac prodavac_id, Double cijena ) {
         this.id = id;   this.vrsta = vrsta; this.datum = datum; this.adresa = adresa;
         this.prodavac = prodavac_id;
         this.cijena = cijena;
@@ -22,11 +22,11 @@ public class Karte {
         this.vrsta = vrsta;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

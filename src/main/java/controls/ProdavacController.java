@@ -1,7 +1,7 @@
 package controls;
 
 import ba.unsa.etf.rpr.Database;
-import ba.unsa.etf.rpr.Prodavac;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.ProdavacDAO;
 import ba.unsa.etf.rpr.ProdavacDAOSQLImplementation;
 import javafx.event.ActionEvent;
@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;

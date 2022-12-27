@@ -1,7 +1,7 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.domain;
 
-public class Kupac {
-    private Integer id;
+public class Kupac implements Idable {
+    private int id;
     private String ime;
     private String mail;
     private String adresa;
@@ -9,7 +9,7 @@ public class Kupac {
     private Prodavac prodavac;
     private Karte karta;
 
-    public Kupac(Integer id, String ime, String mail, String adresa, String telefon, Prodavac prodavac, Karte karta) {
+    public Kupac(int id, String ime, String mail, String adresa, String telefon, Prodavac prodavac, Karte karta) {
         this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;   this.karta = karta;
     }
 
@@ -71,11 +71,11 @@ public class Kupac {
         this.ime = ime;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

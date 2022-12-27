@@ -1,12 +1,12 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.domain;
 
-public class Prodavac {
-    private Integer id;
+public class Prodavac implements Idable {
+    private int id;
     private String ime;
     private String telefon;
     private String mail;
 
-    public Prodavac(Integer id, String ime, String telefon, String mail) {
+    public Prodavac(int id, String ime, String telefon, String mail) {
         this.id = id;   this.ime = ime; this.telefon = telefon; this.mail = mail;
     }
 
@@ -34,11 +34,11 @@ public class Prodavac {
         this.ime = ime;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
