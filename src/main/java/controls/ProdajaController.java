@@ -3,6 +3,7 @@ package controls;
 import ba.unsa.etf.rpr.*;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
+import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ public class ProdajaController {
         this.ime = ime;
     }
 
-    public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
+    public void okButtonClick(ActionEvent actionEvent) throws KarteException, IOException {
         if (fieldCijena.getText().isEmpty() || fieldVrsta.getText().isEmpty() || fieldDatum.getText().isEmpty() || fieldAdresa.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
