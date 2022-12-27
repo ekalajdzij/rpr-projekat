@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.exceptions.KarteException;
+
 import java.io.*;
 import java.sql.*;
 import java.util.Properties;
@@ -14,21 +16,20 @@ public class Database {
     private Database() {
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         Connection connection = null;
         try (InputStream input = new FileInputStream("login.properties")) {
-
             Properties prop = new Properties();
             prop.load(input);
             url = prop.getProperty("db.url");
             user = prop.getProperty("db.user");
             password = prop.getProperty("db.password");
-
-        } catch (IOException io) {
+            connection = DriverManager.getConnection(url, user, password);
+            return connection;
+        } catch (Exception io) {
             io.printStackTrace();
         }
-        connection = DriverManager.getConnection(url, user, password);
-        return connection;
+        return null;
     }
 
     public static void closeConnection(Connection connection) {
