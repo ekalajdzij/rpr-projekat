@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.Database;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.ProdavacDAO;
 import ba.unsa.etf.rpr.ProdavacDAOSQLImplementation;
+import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ public class ProdavacController {
     public TextField fieldTelefon;
     public TextField fieldMail;
 
-    public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
+    public void okButtonClick(ActionEvent actionEvent) throws SQLException, IOException, KarteException {
 
         if (fieldIme.getText().isEmpty() || fieldTelefon.getText().isEmpty() || fieldMail.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
