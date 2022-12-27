@@ -13,8 +13,7 @@ public class Kupac implements Idable {
         this.id = id;   this.ime = ime; this.adresa= adresa;    this. mail = mail;  this.telefon = telefon; this.prodavac = prodavac;   this.karta = karta;
     }
 
-    public Kupac() {
-    }
+    public Kupac() {}
 
     @Override
     public String toString() {
