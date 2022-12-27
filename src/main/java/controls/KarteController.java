@@ -2,6 +2,7 @@ package controls;
 
 import ba.unsa.etf.rpr.KarteDAO;
 import ba.unsa.etf.rpr.KarteDAOSQLImplementation;
+import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ public class KarteController {
     private KarteDAO k = new KarteDAOSQLImplementation();
     private ObservableList<String> karte = FXCollections.observableArrayList(k.getAllKarte());
 
-    public KarteController() throws SQLException {
+    public KarteController() throws KarteException {
     }
 
 
