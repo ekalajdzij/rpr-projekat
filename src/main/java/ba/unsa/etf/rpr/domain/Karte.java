@@ -13,6 +13,7 @@ public class Karte implements Idable{
         this.prodavac = prodavac_id;
         this.cijena = cijena;
     }
+    public Karte() {}
 
     public String getVrsta() {
         return vrsta;
