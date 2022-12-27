@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.exceptions.KarteException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO{
+public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO {
 
     public KarteDAOSQLImplementation() {super("Karte");}
     @Override

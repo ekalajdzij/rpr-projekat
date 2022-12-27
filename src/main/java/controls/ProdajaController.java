@@ -1,6 +1,6 @@
 package controls;
 
-import ba.unsa.etf.rpr.*;
+import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class ProdajaController {
 

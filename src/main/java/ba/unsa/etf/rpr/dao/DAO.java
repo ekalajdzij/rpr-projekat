@@ -1,8 +1,7 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface DAO<T> {

@@ -1,11 +1,8 @@
-package ba.unsa.etf.rpr;
-
-import ba.unsa.etf.rpr.exceptions.KarteException;
+package ba.unsa.etf.rpr.dao;
 
 import java.io.*;
 import java.sql.*;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class Database {
     private static String url;

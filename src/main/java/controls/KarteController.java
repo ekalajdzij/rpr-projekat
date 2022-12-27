@@ -1,10 +1,8 @@
 package controls;
 
-import ba.unsa.etf.rpr.KarteDAO;
-import ba.unsa.etf.rpr.KarteDAOSQLImplementation;
+import ba.unsa.etf.rpr.dao.KarteDAO;
+import ba.unsa.etf.rpr.dao.KarteDAOSQLImplementation;
 import ba.unsa.etf.rpr.exceptions.KarteException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 

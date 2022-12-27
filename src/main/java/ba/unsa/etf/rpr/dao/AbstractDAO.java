@@ -1,15 +1,13 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.sql.*;
 import java.util.*;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +15,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 
-public abstract class  AbstractDAO<T extends Idable> implements DAO<T>{
+public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
     private Connection connection;
     private String tableName;
 

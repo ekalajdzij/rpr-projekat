@@ -1,8 +1,4 @@
-package ba.unsa.etf.rpr;
-
-import ba.unsa.etf.rpr.domain.Karte;
-import ba.unsa.etf.rpr.domain.Kupac;
-import ba.unsa.etf.rpr.domain.Prodavac;
+package ba.unsa.etf.rpr.dao;
 
 public class DaoFactory {
     private static final KarteDAO karteDao = new KarteDAOSQLImplementation();
