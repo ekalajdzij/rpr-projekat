@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.*;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
 import ba.unsa.etf.rpr.domain.Prodavac;
+import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class KupacController {
         this.vrsta_odabrane_karte = opcija; this.kolicina = kolicina;
     }
 
-    public void okButtonClick(ActionEvent actionEvent) throws IOException, SQLException {
+    public void okButtonClick(ActionEvent actionEvent) throws IOException, KarteException {
         Stage stage = new Stage();
         if (fieldName.getText().isEmpty() || fieldAdresa.getText().isEmpty() || fieldMail.getText().isEmpty() || fieldTelefon.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
