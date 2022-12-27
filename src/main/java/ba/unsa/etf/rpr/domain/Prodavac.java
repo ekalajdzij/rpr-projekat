@@ -9,6 +9,7 @@ public class Prodavac implements Idable {
     public Prodavac(int id, String ime, String telefon, String mail) {
         this.id = id;   this.ime = ime; this.telefon = telefon; this.mail = mail;
     }
+    public Prodavac() {}
 
     public String getMail() {
         return mail;
