@@ -22,11 +22,6 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
     public AbstractDAO(String tableName) {
         try (InputStream input = new FileInputStream("login.properties")) {
             this.tableName = tableName;
-            /*Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("login.properties").openStream());
-            String url = p.getProperty("db.url");
-            String user = p.getProperty("db.user");
-            String password = p.getProperty("db.password");*/
             Properties prop = new Properties();
             prop.load(input);
             String url = prop.getProperty("db.url");
