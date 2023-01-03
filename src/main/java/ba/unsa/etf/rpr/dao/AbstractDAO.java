@@ -158,7 +158,7 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("id")) continue; // skip ID
+                if (entry.getKey().equals("id")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
