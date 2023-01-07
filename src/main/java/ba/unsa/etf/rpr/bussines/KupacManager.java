@@ -26,7 +26,14 @@ public class KupacManager {
     }
 
     public void update (Kupac k) throws KarteException {
-        DaoFactory.kupacDAO().update(k);
+        try {
+            DaoFactory.kupacDAO().update(k);
+        } catch (KarteException e) {
+            if(e.getMessage().contains("FOREIGN KEY"))
+                throw new KarteException("Cannot delete Kupac which is related to Prodavac & Karte. First delete related Prodavac & Karte before deleting Kupac. ");
+            throw e;
+        }
+
     }
 
     public Kupac add(Kupac k) throws KarteException {
