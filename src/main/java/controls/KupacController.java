@@ -65,7 +65,7 @@ public class KupacController {
             k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
             kDAO.add(k);
 
-            FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/kupio.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupio.fxml"));
             KupioController kupioController = new KupioController(vrsta_odabrane_karte, kolicina, cijena.toString());
             fxmlloader.setController(kupioController);
 
