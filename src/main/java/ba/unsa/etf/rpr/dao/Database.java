@@ -4,6 +4,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
+
+
 public class Database {
     private static String url;
     private static String user;
