@@ -50,7 +50,7 @@ public class ProdavacController {
             pDAO.add(prodavac);
 
             Stage stage = new Stage();
-            FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/prodaja.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/prodaja.fxml"));
             ProdajaController prodajaController = new ProdajaController(ime);
             fxmlloader.setController(prodajaController);
 
