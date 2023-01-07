@@ -52,7 +52,7 @@ public class ProdajaController {
             kDAO.add(k);
 
             Stage stage = new Stage();
-            FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/ubaciokartu.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/ubaciokartu.fxml"));
             Scene scene = new Scene(fxmlloader.load(), 500, 250);
             stage.setTitle("");
             stage.setScene(scene);
