@@ -19,7 +19,12 @@ public class KarteManager {
     }
 
     public void delete(int id) throws KarteException {
-        DaoFactory.karteDAO().delete(id);
+        try {
+            DaoFactory.karteDAO().delete(id);
+        } catch(KarteException e) {
+            if(e.getMessage().contains("FOREIGN KEY"))
+                throw new KarteException("Cannot delete Karte which is related to Prodavac. First delete related Prodavac before deleting Karte");
+        }
     }
 
     public Karte getById(int id) throws KarteException {
