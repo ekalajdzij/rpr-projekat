@@ -24,6 +24,7 @@ public class KarteManager {
         } catch(KarteException e) {
             if(e.getMessage().contains("FOREIGN KEY"))
                 throw new KarteException("Cannot delete Karte which is related to Prodavac. First delete related Prodavac before deleting Karte");
+            throw e;
         }
     }
 
