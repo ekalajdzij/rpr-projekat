@@ -9,9 +9,9 @@ import java.util.List;
 
 public class KarteManager {
 
-    public void validateKarteIme(String ime) throws KarteException {
+    public void validateKarteVsrta(String ime) throws KarteException {
         if(ime == null || ime.length() > 80 || ime.length() < 10)
-            throw new KarteException("Ime karte mora biti izmedju 10 i 80 karaktera");
+            throw new KarteException("Naziv vrste karte mora biti izmedju 10 i 80 karaktera");
     }
 
     public List<Karte> getAll() throws KarteException {
@@ -32,6 +32,7 @@ public class KarteManager {
     }
 
     public void update(Karte k) throws KarteException {
+        validateKarteVsrta(k.getVrsta());
         DaoFactory.karteDAO().update(k);
     }
 
