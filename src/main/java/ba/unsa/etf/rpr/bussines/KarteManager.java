@@ -37,6 +37,7 @@ public class KarteManager {
     }
 
     public Karte add (Karte k) throws KarteException {
+        validateKarteVsrta(k.getVrsta());
         return DaoFactory.karteDAO().add(k);
     }
 }
