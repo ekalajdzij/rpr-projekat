@@ -9,6 +9,11 @@ import java.util.List;
 
 public class ProdavacManager {
 
+    public void validateProdavacIme(String ime) throws KarteException{
+        if(ime == null || ime.length() > 50 || ime.length() < 3)
+            throw new KarteException("Ime prodavca mora biti izmedju 3 i 50 karaktera!");
+    }
+
     public List<Prodavac> getAll() throws KarteException {
         return DaoFactory.prodavacDAO().getAll();
     }
