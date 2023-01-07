@@ -45,7 +45,7 @@ public class KarteController {
             alert.showAndWait();
         } else {
             Stage stage = new Stage();
-            FXMLLoader fxmlloader = new FXMLLoader(JavaFXKlasa.HelloApplication.class.getResource("/fxml/kupac.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupac.fxml"));
             KupacController kupacController = new KupacController(choiceBox.getSelectionModel().getSelectedItem(),Integer.valueOf(fieldKolicina.getText()));
             fxmlloader.setController(kupacController);
             Scene scene = new Scene(fxmlloader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
