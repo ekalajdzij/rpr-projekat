@@ -32,6 +32,7 @@ public class ProdavacManager {
     }
 
     public Prodavac add (Prodavac p) throws KarteException {
+        validateProdavacIme(p.getIme());
         return DaoFactory.prodavacDAO().add(p);
     }
 }
