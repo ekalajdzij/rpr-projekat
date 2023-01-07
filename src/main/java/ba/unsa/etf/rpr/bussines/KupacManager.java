@@ -38,6 +38,7 @@ public class KupacManager {
     }
 
     public Kupac add(Kupac k) throws KarteException {
+        validateKupacIme(k.getIme());
         return DaoFactory.kupacDAO().add(k);
     }
 }
