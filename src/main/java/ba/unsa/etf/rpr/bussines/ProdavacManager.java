@@ -27,6 +27,7 @@ public class ProdavacManager {
     }
 
     public void update (Prodavac p) throws KarteException {
+        validateProdavacIme(p.getIme());
         DaoFactory.prodavacDAO().update(p);
     }
 
