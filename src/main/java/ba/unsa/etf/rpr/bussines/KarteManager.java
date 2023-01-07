@@ -9,6 +9,11 @@ import java.util.List;
 
 public class KarteManager {
 
+    public void validateKarteIme(String ime) throws KarteException {
+        if(ime == null || ime.length() > 80 || ime.length() < 10)
+            throw new KarteException("Ime karte mora biti izmedju 10 i 80 karaktera");
+    }
+
     public List<Karte> getAll() throws KarteException {
         return DaoFactory.karteDAO().getAll();
     }
