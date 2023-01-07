@@ -9,9 +9,15 @@ import java.util.TreeMap;
 
 public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements KupacDAO {
 
+    private static KupacDAOSQLImplementation instance = null;
 
     public KupacDAOSQLImplementation() {
         super("Kupac");
+    }
+
+    public static KupacDAOSQLImplementation getInstance() {
+        if(instance == null) instance = new KupacDAOSQLImplementation();
+        return instance;
     }
 
     @Override
