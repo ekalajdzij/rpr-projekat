@@ -14,7 +14,10 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
         super("Prodavac");
     }
 
-
+    public static ProdavacDAOSQLImplementation getInstance() {
+        if (instance == null) instance = new ProdavacDAOSQLImplementation();
+        return instance;
+    }
 
     public int getId(String ime) throws KarteException {
         try {Connection connection = Database.getConnection();
