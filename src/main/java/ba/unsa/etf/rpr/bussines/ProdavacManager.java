@@ -19,7 +19,7 @@ public class ProdavacManager {
     }
 
     public void delete (int id) throws KarteException {
-        DaoFactory.prodavacDAO().delete(id);
+            DaoFactory.prodavacDAO().delete(id);
     }
 
     public Prodavac getById (int id) throws KarteException {
