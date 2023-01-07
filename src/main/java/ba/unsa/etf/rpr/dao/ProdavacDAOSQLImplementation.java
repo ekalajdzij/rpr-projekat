@@ -19,6 +19,10 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
         return instance;
     }
 
+    public static void removeInstance() {
+        if(instance != null) instance = null;
+    }
+
     public int getId(String ime) throws KarteException {
         try {Connection connection = Database.getConnection();
             String sql = "SELECT id FROM Prodavac WHERE ime = ?";
