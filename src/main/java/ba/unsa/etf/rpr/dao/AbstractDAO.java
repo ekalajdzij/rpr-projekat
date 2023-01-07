@@ -16,28 +16,34 @@ import java.util.Map;
 import java.util.Properties;
 
 public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
-    private Connection connection;
+    private static Connection connection;
     private String tableName;
 
     public AbstractDAO(String tableName) {
-        try (InputStream input = new FileInputStream("login.properties")) {
-            this.tableName = tableName;
-            Properties prop = new Properties();
-            prop.load(input);
-            String url = prop.getProperty("db.url");
-            String user = prop.getProperty("db.user");
-            String password = prop.getProperty("db.password");
-            this.connection = DriverManager.getConnection(url,user,password);
-        }  catch (Exception io) {
-            io.printStackTrace();
-            System.exit(0);
+        this.tableName = tableName;
+        if(connection == null) createConnection();
+    }
+    private static void createConnection() {
+        if(AbstractDAO.connection == null) {
+            try (InputStream input = new FileInputStream("login.properties")) {
+                Properties prop = new Properties();
+                prop.load(input);
+                String url = prop.getProperty("db.url");
+                String user = prop.getProperty("db.user");
+                String password = prop.getProperty("db.password");
+                AbstractDAO.connection = DriverManager.getConnection(url,user,password);
+            }  catch (Exception io) {
+                io.printStackTrace();
+                System.exit(0);
+            }
         }
     }
 
-    public Connection getConnection() {return this.connection;}
-    public void setConnection(Connection connection){
-        this.connection = connection;
-    }
+    public Connection getConnection() {return AbstractDAO.connection;}
+
+   // public void setConnection(Connection connection){
+       // this.connection = connection;
+    //}
     public abstract T row2object(ResultSet rs) throws KarteException;
     public abstract Map<String, Object> object2row(T object);
 
