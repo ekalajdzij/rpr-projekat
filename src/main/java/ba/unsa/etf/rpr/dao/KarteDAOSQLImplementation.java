@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO {
-
+    private static KarteDAOSQLImplementation instance = null;
     public KarteDAOSQLImplementation() {super("Karte");}
     @Override
     public Karte row2object(ResultSet rs) throws KarteException {
