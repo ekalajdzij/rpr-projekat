@@ -20,6 +20,10 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
         return instance;
     }
 
+    public static void removeInstance() {
+        if (instance != null) instance = null;
+    }
+
     @Override
     public int getId(String ime) throws KarteException {
         try {Connection connection = Database.getConnection();
