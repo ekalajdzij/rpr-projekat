@@ -17,6 +17,9 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         if(instance == null) instance = new KarteDAOSQLImplementation();
         return instance;
     }
+    public static void removeInstance() {
+        if (instance != null) instance = null;
+    }
     @Override
     public Karte row2object(ResultSet rs) throws KarteException {
         try {
