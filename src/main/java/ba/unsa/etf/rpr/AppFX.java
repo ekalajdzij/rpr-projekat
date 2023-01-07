@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 
-public class App extends Application{
+public class AppFX extends Application{
     @Override
         public void start(Stage stage) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/pocetna.fxml"));
