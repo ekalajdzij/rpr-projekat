@@ -8,6 +8,11 @@ import java.util.List;
 
 public class KupacManager {
 
+    public void validateKupacIme(String ime) throws KarteException {
+        if(ime == null || ime.length() > 50 || ime.length() < 3)
+            throw new KarteException("Ime kupca mora biti izmedju 3 i 50 karaktera!");
+    }
+
     public List<Kupac> getAll() throws KarteException {
         return DaoFactory.kupacDAO().getAll();
     }
