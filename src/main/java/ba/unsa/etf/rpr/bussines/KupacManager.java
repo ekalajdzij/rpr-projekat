@@ -18,7 +18,14 @@ public class KupacManager {
     }
 
     public void delete (int id) throws KarteException {
-        DaoFactory.prodavacDAO().delete(id);
+        try {
+            DaoFactory.kupacDAO().delete(id);
+        } catch (KarteException e) {
+            if(e.getMessage().contains("FOREIGN KEY"))
+                throw new KarteException("Cannot delete Kupac which is related to Prodavac & Karte. First delete related Prodavac & Karte before deleting Kupac. ");
+            throw e;
+        }
+
     }
 
     public Kupac getById(int id) throws KarteException {
@@ -26,14 +33,8 @@ public class KupacManager {
     }
 
     public void update (Kupac k) throws KarteException {
-        try {
-            DaoFactory.kupacDAO().update(k);
-        } catch (KarteException e) {
-            if(e.getMessage().contains("FOREIGN KEY"))
-                throw new KarteException("Cannot delete Kupac which is related to Prodavac & Karte. First delete related Prodavac & Karte before deleting Kupac. ");
-            throw e;
-        }
-
+        validateKupacIme(k.getIme());
+        DaoFactory.kupacDAO().update(k);
     }
 
     public Kupac add(Kupac k) throws KarteException {
