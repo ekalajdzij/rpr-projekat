@@ -9,9 +9,12 @@ import java.util.TreeMap;
 
 public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implements ProdavacDAO {
 
+    private static ProdavacDAOSQLImplementation instance = null;
     public ProdavacDAOSQLImplementation() {
         super("Prodavac");
     }
+
+
 
     public int getId(String ime) throws KarteException {
         try {Connection connection = Database.getConnection();
