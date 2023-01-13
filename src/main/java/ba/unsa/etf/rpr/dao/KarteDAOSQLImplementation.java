@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
@@ -11,6 +12,7 @@ import java.util.TreeMap;
 
 public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO {
     private static KarteDAOSQLImplementation instance = null;
+    private KarteManager manager = new KarteManager();
     public KarteDAOSQLImplementation() {super("Karte");}
 
     public static KarteDAOSQLImplementation getInstance() {
@@ -87,10 +89,10 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         } catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
-    }
+    } */
 
     @Override
-    public int add(Karte karte) throws KarteException {
+    public Karte add(Karte karte) throws KarteException {
         try {Connection con = Database.getConnection();
         String sql = "INSERT INTO Karte (id, vrsta, datum, adresa, cijena, Prodavac_id) VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -103,12 +105,13 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         int rez = ps.executeUpdate();
         Database.closePreparedStatement(ps);
         Database.closeConnection(con);
-        return rez;}
+        return karte;}
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
 
+    /*
     @Override
     public int update(Karte karte) throws KarteException{
         try {Connection con = Database.getConnection();
@@ -147,9 +150,11 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
     } */
     @Override
     public List<String> getAllKarte() throws KarteException{
-        KarteDAO kDA0 = new KarteDAOSQLImplementation();
+        //Karte k = new Karte();
+        //KarteDAO kDA0 = new KarteDAOSQLImplementation();
         List<String> lista = new ArrayList<>();
-        List<Karte> list = kDA0.getAll();
+        List<Karte> list = manager.getAll();
+        //List<Karte> list = kDA0.getAll();
         for (Karte x : list)
             lista.add(x.getVrsta());
         return lista;
@@ -157,16 +162,17 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public int dajIdKarte(String vrsta) throws KarteException {
-        try {Connection connection = Database.getConnection();
-        String sql = "SELECT id FROM Karte WHERE vrsta = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1,vrsta);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            int id = rs.getInt("id");
-            return id;
-        } }
-        catch(SQLException e) {
+        try {
+            Connection connection = getConnection();
+            String sql = "SELECT id FROM Karte WHERE vrsta = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,vrsta);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                return id;
+            }
+        } catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
         return -1;
@@ -174,7 +180,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public int dajIdProdavcaKarte(String vrsta) throws KarteException {
-        try {Connection connection = Database.getConnection();
+        try {Connection connection = getConnection();
         String sql = "SELECT Prodavac_id FROM Karte WHERE vrsta = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1,vrsta);
@@ -190,7 +196,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
     }
     @Override
     public Double dajCijenu(int id) throws KarteException {
-        try {Connection connection = Database.getConnection();
+        try {Connection connection = getConnection();
         String sql = "SELECT cijena FROM Karte WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1,id);
