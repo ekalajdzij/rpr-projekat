@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
@@ -10,6 +11,7 @@ import java.util.TreeMap;
 public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implements ProdavacDAO {
 
     private static ProdavacDAOSQLImplementation instance = null;
+    private ProdavacManager manager = new ProdavacManager();
     public ProdavacDAOSQLImplementation() {
         super("Prodavac");
     }
@@ -24,7 +26,7 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
     }
 
     public int getId(String ime) throws KarteException {
-        try {Connection connection = Database.getConnection();
+        try {Connection connection = getConnection();
             String sql = "SELECT id FROM Prodavac WHERE ime = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,ime);
@@ -58,7 +60,7 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
         row.put("ime", object.getIme());
         return row;
     }
-    /*@Override
+    /* @Override
     public Prodavac getById(int id) throws KarteException {
         try {Connection con = Database.getConnection();      //povezemo se sa bazom
         Prodavac prodavac = null;                       //promjenjiva tipa Prodavac
@@ -100,9 +102,9 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
             throw new KarteException(e.getMessage(),e);
         }
     }
-
+*/
     @Override
-    public int add(Prodavac prodavac) throws KarteException {
+    public Prodavac add(Prodavac prodavac) throws KarteException {
         try {Connection con = Database.getConnection();
         String sql = "INSERT INTO Prodavac (id, ime, telefon, mail) VALUES (?,?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -115,12 +117,12 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
 
         Database.closePreparedStatement(ps);
         Database.closeConnection(con);
-        return rez;}
+        return prodavac;}
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
-
+/*
     @Override
     public int update(Prodavac prodavac) throws KarteException {
         try {Connection connection = Database.getConnection();
