@@ -1,7 +1,9 @@
 package controls;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.dao.KarteDAO;
 import ba.unsa.etf.rpr.dao.KarteDAOSQLImplementation;
+import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,8 +26,8 @@ public class KarteController {
     public Button okButton;
     public ChoiceBox<String> choiceBox = new ChoiceBox<>();
 
-    private KarteDAO k = new KarteDAOSQLImplementation();
-    private ObservableList<String> karte = FXCollections.observableArrayList(k.getAllKarte());
+    private KarteManager karteManager = new KarteManager();
+    private ObservableList<String> karte = FXCollections.observableArrayList(karteManager.getAllKarte());
 
     public KarteController() throws KarteException {
     }
