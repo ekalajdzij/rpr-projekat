@@ -41,4 +41,10 @@ public class KupacManager {
         validateKupacIme(k.getIme());
         return DaoFactory.kupacDAO().add(k);
     }
+
+    public int getId(String ime) throws KarteException {
+        return DaoFactory.kupacDAO().getId(ime);
+    }
+
+
 }
