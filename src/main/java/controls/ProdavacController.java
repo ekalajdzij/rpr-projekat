@@ -1,5 +1,6 @@
 package controls;
 
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.dao.Database;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.dao.ProdavacDAO;
@@ -45,9 +46,10 @@ public class ProdavacController {
             String mail = fieldMail.getText();
 
             Connection connection = Database.getConnection();
-            ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
+            ProdavacManager prodavacManager = new ProdavacManager();
+            //ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
             Prodavac prodavac = new Prodavac(0, ime, telefon, mail);
-            pDAO.add(prodavac);
+            prodavacManager.add(prodavac);
 
             Stage stage = new Stage();
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/prodaja.fxml"));
