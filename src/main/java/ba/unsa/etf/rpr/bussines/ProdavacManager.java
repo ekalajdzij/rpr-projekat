@@ -35,4 +35,8 @@ public class ProdavacManager {
         validateProdavacIme(p.getIme());
         return DaoFactory.prodavacDAO().add(p);
     }
+    public int getId(String ime) throws KarteException {
+        return DaoFactory.prodavacDAO().getId(ime);
+    }
+
 }
