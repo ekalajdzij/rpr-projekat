@@ -1,5 +1,7 @@
 package controls;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
@@ -34,7 +36,13 @@ public class ProdajaController {
             alert.setHeaderText("Greška pri unosu podataka! ");
             alert.setContentText("Molimo Vas unesite podatke vaše karte ponovo!");
             alert.showAndWait();
-        }else {
+        } else if(Integer.parseInt(fieldCijena.getText())== 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Greška! Cijena ne može biti 0! ");
+            alert.setContentText("Molimo Vas unesite podatke vaše karte ponovo!");
+            alert.showAndWait();
+        } else {
             String pomocni = fieldCijena.getText();
             Double cijena = Double.parseDouble(pomocni);
             String vrsta = fieldVrsta.getText();
@@ -42,14 +50,16 @@ public class ProdajaController {
             String adresa = fieldAdresa.getText();
 
             Connection connection = Database.getConnection();
-            KarteDAO kDAO = new KarteDAOSQLImplementation();
+            KarteManager karteManager = new KarteManager();
+            //KarteDAO kDAO = new KarteDAOSQLImplementation();
 
-            ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
-            int p_id = pDAO.getId(ime);
-            Prodavac prodavac = pDAO.getById(p_id);
+            //ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
+            ProdavacManager prodavacManager = new ProdavacManager();
+            int p_id = prodavacManager.getId(ime);
+            Prodavac prodavac = prodavacManager.getById(p_id);
 
             Karte k = new Karte(0,vrsta,datum,adresa,prodavac,cijena);
-            kDAO.add(k);
+            karteManager.add(k);
 
             Stage stage = new Stage();
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/ubaciokartu.fxml"));
