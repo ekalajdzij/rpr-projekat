@@ -9,9 +9,9 @@ import java.util.List;
 
 public class KarteManager {
 
-    public void validateKarteVsrta(String ime) throws KarteException {
-        if(ime == null || ime.length() > 80 || ime.length() < 10)
-            throw new KarteException("Naziv vrste karte mora biti izmedju 10 i 80 karaktera");
+    public void validateKarteVrsta(String ime) throws KarteException {
+        if(ime == null || ime.length() > 80 || ime.length() < 2)
+            throw new KarteException("Naziv vrste karte mora biti izmedju 2 i 80 karaktera");
     }
 
     public List<Karte> getAll() throws KarteException {
@@ -33,12 +33,25 @@ public class KarteManager {
     }
 
     public void update(Karte k) throws KarteException {
-        validateKarteVsrta(k.getVrsta());
+        validateKarteVrsta(k.getVrsta());
         DaoFactory.karteDAO().update(k);
     }
-
     public Karte add (Karte k) throws KarteException {
-        validateKarteVsrta(k.getVrsta());
+        validateKarteVrsta(k.getVrsta());
         return DaoFactory.karteDAO().add(k);
+    }
+
+    public int dajIdProdavcaKarte(String vrsta) throws KarteException {
+        return DaoFactory.karteDAO().dajIdProdavcaKarte(vrsta);
+    }
+
+    public Double dajCijenu(int id) throws KarteException {
+        return DaoFactory.karteDAO().dajCijenu(id);
+    }
+    public int dajIdKarte(String vrsta) throws KarteException {
+        return DaoFactory.karteDAO().dajIdKarte(vrsta);
+    }
+    public List<String> getAllKarte() throws KarteException {
+        return DaoFactory.karteDAO().getAllKarte();
     }
 }
