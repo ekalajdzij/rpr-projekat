@@ -1,5 +1,8 @@
 package controls;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
+import ba.unsa.etf.rpr.bussines.KupacManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
@@ -46,24 +49,27 @@ public class KupacController {
         }
         else {
             Connection connection = Database.getConnection();
-            KupacDAO kDAO = new KupacDAOSQLImplementation();
+            KupacManager kupacManager = new KupacManager();
+            //KupacDAO kDAO = new KupacDAOSQLImplementation();
             String ime = fieldName.getText();
             String mail = fieldMail.getText();
             String telefon = fieldTelefon.getText();
             String adresa = fieldAdresa.getText();
 
-            KarteDAO karteDAO = new KarteDAOSQLImplementation();
-            int id_karte = karteDAO.dajIdKarte(vrsta_odabrane_karte);
-            Double cijena = karteDAO.dajCijenu(id_karte);
-            Karte karta = karteDAO.getById(id_karte);
+            KarteManager karteManager = new KarteManager();
+            //KarteDAO karteDAO = new KarteDAOSQLImplementation();
+            int id_karte = karteManager.dajIdKarte(vrsta_odabrane_karte);
+            Double cijena = karteManager.dajCijenu(id_karte);
+            Karte karta = karteManager.getById(id_karte);
 
-            ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
-            int id_prodavca = karteDAO.dajIdProdavcaKarte(vrsta_odabrane_karte);
-            Prodavac prodavac = pDAO.getById(id_prodavca);
+            //ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
+            ProdavacManager prodavacManager = new ProdavacManager();
+            int id_prodavca = karteManager.dajIdProdavcaKarte(vrsta_odabrane_karte);
+            Prodavac prodavac = prodavacManager.getById(id_prodavca);
 
            Kupac k = new Kupac();
             k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
-            kDAO.add(k);
+            kupacManager.add(k);
 
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupio.fxml"));
             KupioController kupioController = new KupioController(vrsta_odabrane_karte, kolicina, cijena.toString());
