@@ -1,6 +1,11 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
+import ba.unsa.etf.rpr.bussines.KupacManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
+import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
 import java.sql.*;
@@ -10,6 +15,7 @@ import java.util.TreeMap;
 public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements KupacDAO {
 
     private static KupacDAOSQLImplementation instance = null;
+    private KupacManager manager = new KupacManager();
 
     public KupacDAOSQLImplementation() {
         super("Kupac");
@@ -26,7 +32,9 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
 
     @Override
     public int getId(String ime) throws KarteException {
-        try {Connection connection = Database.getConnection();
+        try {
+            //Connection connection = Database.getConnection();
+            Connection connection = getConnection();
             String sql = "SELECT id FROM Kupac WHERE ime = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,ime);
@@ -64,9 +72,10 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
 
 
 
-    /* @Override
+     @Override
     public Kupac getById(int id) throws KarteException {
-        try {Connection connection = Database.getConnection();
+        try {Connection connection = getConnection();
+            //Connection connection = Database.getConnection();
         Kupac kupac = null;
         String sql = "SELECT id, ime, mail, adresa, telefon, Prodavac_id, Karta_id FROM Kupac WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -78,10 +87,11 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
             String mail = rs.getString("mail");
             String adresa = rs.getString("adresa");
             String telefon = rs.getString("telefon");
-            ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
-            Prodavac prodavac = prodavacDAO.getById(rs.getInt("Prodavac_id"));
-            KarteDAO karteDAO = new KarteDAOSQLImplementation();
-            Karte karta = karteDAO.getById(rs.getInt("Karta_id"));
+
+            ProdavacManager managerZaProdavca = new ProdavacManager();
+            Prodavac prodavac = managerZaProdavca.getById(rs.getInt("Prodavac_id"));
+            KarteManager managerZaKarte = new KarteManager();
+            Karte karta = managerZaKarte.getById(rs.getInt("Karta_id"));
             return new Kupac(oid,ime,mail,adresa,telefon,prodavac,karta);
         }} catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
@@ -89,7 +99,7 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
         return null;
     }
 
-    @Override
+    /* @Override
     public List<Kupac> getAll() throws KarteException {
        try { Connection connection = Database.getConnection();
         String sql = "SELECT id, ime, mail, adresa, telefon, Prodavac_id FROM Kupac";
@@ -115,9 +125,9 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
        }
     }
 
-
+*/
     @Override
-    public int add(Kupac kupac) throws KarteException {
+    public Kupac add(Kupac kupac) throws KarteException {
         try {Connection connection = Database.getConnection();
         String sql = "INSERT INTO Kupac (id,ime,mail,adresa,telefon,Prodavac_id,Karta_id) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -133,12 +143,12 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
         Database.closePreparedStatement(ps);
         Database.closeConnection(connection);
 
-        return rez;}
+        return kupac;}
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
-
+/*
     @Override
     public int update(Kupac kupac) throws KarteException {
         try {Connection connection = Database.getConnection();
