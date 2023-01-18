@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.bussines;
 
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.dao.KupacDAOSQLImplementation;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
@@ -8,9 +9,12 @@ import ba.unsa.etf.rpr.exceptions.KarteException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 public class KupacManagerTest {
     private KupacManager kupacManager;
@@ -73,6 +77,33 @@ public class KupacManagerTest {
         }
 
     }
+    @Test
+    void addTest() throws KarteException {
+        /*
+        Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
+         */
+        MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
+        daoFactoryMockedStatic.when(DaoFactory::kupacDAO).thenReturn(kupacDAOSQLImplementationMock);
+        when(DaoFactory.kupacDAO().getAll()).thenReturn(kupci);
+        /*
+        Bacit ce se izuzetak jer instanca Kupac.java class ima value za id
+         */
+        ProdavacManager prodavacManager = Mockito.mock(ProdavacManager.class);
+        KarteManager karteManager = Mockito.mock(KarteManager.class);
+        Prodavac p = prodavacManager.getById(1);
+        Karte k = karteManager.getById(1);
+        kupac = new Kupac(40,"John Lennon", "johnnyL@mail.com", "adresaJohhnija", "+381 333 222", p, k);
+        Mockito.doCallRealMethod().when(kupacManager).add(kupac);
+        KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
+                    kupacManager.add(kupac);},
+                "Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen");
+        Assertions.assertEquals("Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
+        daoFactoryMockedStatic.verify(DaoFactory::kupacDAO);
+        Mockito.verify(kupacManager).add(kupac);
+        daoFactoryMockedStatic.close();
+    }
+
+
 
 
 
