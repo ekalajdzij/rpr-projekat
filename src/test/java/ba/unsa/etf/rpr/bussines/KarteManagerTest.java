@@ -72,6 +72,32 @@ public class KarteManagerTest {
             Assertions.assertTrue(false);
         }
     }
+    @Test
+    void add() throws KarteException {
+        Prodavac p = Mockito.mock(Prodavac.class);
+        ProdavacManager pmanager = Mockito.mock(ProdavacManager.class);
+        p = pmanager.getById(1);
+        /*
+        Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
+         */
+        MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
+        daoFactoryMockedStatic.when(DaoFactory::karteDAO).thenReturn(karteDAOSQLImplementationMock);
+        when(DaoFactory.karteDAO().getAll()).thenReturn(karte);
+        /*
+        Bacit će se izuzetak jer instanca Karte.java class ima value za id
+         */
+        karta = new Karte(12,"","","",p,0.0);
+        Mockito.doCallRealMethod().when(karteManager).add(karta);
+        KarteException karteException = Assertions.assertThrows(KarteException.class, () -> {
+                    karteManager.add(karta);
+                },
+                "Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen");
+        Assertions.assertEquals("Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen", karteException.getMessage());
+        daoFactoryMockedStatic.verify(DaoFactory::karteDAO);
+        Mockito.verify(karteManager).add(karta);
+        daoFactoryMockedStatic.close();
+
+    }
 
 
 
