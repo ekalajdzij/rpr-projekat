@@ -19,7 +19,14 @@ public class ProdavacManager {
     }
 
     public void delete (int id) throws KarteException {
+        try {
             DaoFactory.prodavacDAO().delete(id);
+        } catch(KarteException e) {
+            if(e.getMessage().contains("foreign key")) {
+                throw new KarteException("Cannot delete Prodavac which is related to Karte. First delete related Karte before deleting Prodavac");
+            }
+            throw e;
+        }
     }
 
     public Prodavac getById (int id) throws KarteException {
@@ -32,8 +39,13 @@ public class ProdavacManager {
     }
 
     public Prodavac add (Prodavac p) throws KarteException {
+        if (p.getId() != 0) throw new KarteException("Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen");
         validateProdavacIme(p.getIme());
-        return DaoFactory.prodavacDAO().add(p);
+        try {
+            return DaoFactory.prodavacDAO().add(p);
+        } catch(KarteException e) {
+            throw e;
+        }
     }
     public int getId(String ime) throws KarteException {
         return DaoFactory.prodavacDAO().getId(ime);
