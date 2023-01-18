@@ -60,14 +60,14 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
         row.put("ime", object.getIme());
         return row;
     }
-    /* @Override
+     @Override
     public Prodavac getById(int id) throws KarteException {
-        try {Connection con = Database.getConnection();      //povezemo se sa bazom
-        Prodavac prodavac = null;                       //promjenjiva tipa Prodavac
-        String sql = "SELECT id, ime, telefon, mail FROM Prodavac WHERE id = ? ";   //nas sql upit
-        PreparedStatement ps = con.prepareStatement(sql);   //formiramo preparedstatement
-        ps.setInt(1,id);                        //placeholdere u upitu zamijenimo konkretnim vrijednostima
-        ResultSet rs = ps.executeQuery();                   //izvrsimo nas upit
+        try {Connection con = Database.getConnection();
+        Prodavac prodavac = null;
+        String sql = "SELECT id, ime, telefon, mail FROM Prodavac WHERE id = ? ";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1,id);
+        ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             int oid = rs.getInt("id");
             String ime = rs.getString("ime");
@@ -80,7 +80,7 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
             throw new KarteException(e.getMessage(),e);
         }
     }
-
+/*
     @Override
     public List<Prodavac> getAll() throws KarteException {
         try {Connection con = Database.getConnection();                //povezemo se sa bazom
