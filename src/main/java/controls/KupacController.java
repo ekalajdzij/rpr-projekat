@@ -27,8 +27,8 @@ public class KupacController {
     public TextField fieldTelefon;
     private String vrsta_odabrane_karte;
     private Integer kolicina;
-    public KupacController(String opcija, Integer kolicina) {
-        this.vrsta_odabrane_karte = opcija; this.kolicina = kolicina;
+    public KupacController(Karte opcija, Integer kolicina) {
+        this.vrsta_odabrane_karte = opcija.getVrsta(); this.kolicina = kolicina;
     }
 
     public void okButtonClick(ActionEvent actionEvent) throws IOException, KarteException {
