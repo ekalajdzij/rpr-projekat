@@ -46,6 +46,16 @@ public class KupacManagerTest {
         Assertions.assertEquals(1,kupci.get(0).getId());
         Assertions.assertEquals("Karim Smith", kupci.get(0).getIme());
     }
+    @Test
+    void deleteTest() {
+        try {
+            kupac = kupacManager.getById(7);
+            Mockito.doCallRealMethod().when(kupacManager).delete(7);
+        } catch(KarteException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+    }
 
 
 
