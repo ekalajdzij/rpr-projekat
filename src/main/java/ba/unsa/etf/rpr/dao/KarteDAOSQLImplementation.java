@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.domain.Karte;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 
 import java.sql.*;
@@ -41,7 +42,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         }
 
 
-    /*@Override
+    @Override
     public Karte getById(int id) throws KarteException{
         try {
             Connection con = Database.getConnection();
@@ -89,7 +90,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         } catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
-    } */
+    }
 
     @Override
     public Karte add(Karte karte) throws KarteException {
