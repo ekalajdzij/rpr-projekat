@@ -34,19 +34,19 @@
       </Label>
       <Label prefHeight="38.0" prefWidth="290.0" text="Vrsta" textFill="WHITE" underline="true" GridPane.rowIndex="1">
          <font>
-            <Font name="Century Gothic" size="20.0" />
+             <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <Label prefHeight="45.0" prefWidth="286.0" text="Datum" textFill="WHITE" underline="true" GridPane.rowIndex="2">
          <font>
-            <Font size="20.0" />
+             <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <Label prefHeight="34.0" prefWidth="287.0" text="Adresa" textFill="WHITE" underline="true" GridPane.rowIndex="3">
          <font>
-            <Font name="Century Gothic" size="20.0" />
+             <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <Label prefHeight="38.0" prefWidth="287.0" text="Cijena" textFill="WHITE" underline="true" GridPane.rowIndex="4">
          <font>
-            <Font size="20.0" />
+             <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <Button fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#okButtonClick" prefHeight="26.0" prefWidth="287.0" text="OK" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <TextField fx:id="fieldCijena" GridPane.columnIndex="1" GridPane.rowIndex="4" />

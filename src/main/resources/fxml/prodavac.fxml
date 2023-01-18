@@ -33,15 +33,15 @@
       </Label>
       <Label contentDisplay="CENTER" prefHeight="26.0" prefWidth="254.0" text="Ime korisnika: " textFill="WHITE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
-            <Font name="Century Gothic" size="22.0" />
+            <Font name="Century Gothic Bold" size="22.0" />
          </font></Label>
       <Label prefHeight="27.0" prefWidth="255.0" text="Kontakt telefon:" textFill="WHITE" underline="true" GridPane.rowIndex="2">
          <font>
-            <Font name="Century Gothic" size="20.0" />
+            <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <Label prefHeight="30.0" prefWidth="262.0" text="Mail adresa:" textFill="WHITE" underline="true" GridPane.rowIndex="3">
          <font>
-            <Font name="Century Gothic" size="20.0" />
+            <Font name="Century Gothic Bold" size="20.0" />
          </font></Label>
       <TextField fx:id="fieldIme" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="fieldTelefon" GridPane.columnIndex="1" GridPane.rowIndex="2" />
