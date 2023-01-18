@@ -1,7 +1,9 @@
 package ba.unsa.etf.rpr.bussines;
 
 import ba.unsa.etf.rpr.dao.KupacDAOSQLImplementation;
+import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,6 +57,21 @@ public class KupacManagerTest {
             e.printStackTrace();
             Assertions.assertTrue(false);
         }
+    }
+    @Test
+    void updateTest() throws KarteException {
+        ProdavacManager prodavacManager = Mockito.mock(ProdavacManager.class);
+        KarteManager karteManager = Mockito.mock(KarteManager.class);
+        Prodavac p = prodavacManager.getById(1);
+        Karte k = karteManager.getById(1);
+        Kupac kup = new Kupac(2,"John Lennon", "johnnyL@mail.com", "adresaJohhnija", "+381 333 222", p, k);
+        try {
+            Mockito.doCallRealMethod().when(kupacManager).update(kup);
+        } catch(KarteException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
     }
 
 
