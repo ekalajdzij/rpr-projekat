@@ -63,7 +63,15 @@ public class KarteManagerTest {
             karteManager.delete(2);}, "Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.");
         Assertions.assertEquals("Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.",exception.getMessage());
     }
-
+    @Test
+    void getByIdTest() {
+        try {
+            Mockito.doCallRealMethod().when(karteManager).getById(1);
+        }catch(KarteException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+    }
 
 
 
