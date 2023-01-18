@@ -35,6 +35,15 @@ public class AppFXTest
         Karte karta = karteManager.getById(1);
         Assertions.assertEquals(1,karta.getId());
     }
+    @Test
+    public void test2() throws KarteException {
+        KupacManager kupacManager = new KupacManager();
+        Kupac kupac = kupacManager.getById(1);
+        Assertions.assertEquals("+45 421 689", kupac.getTelefon());
+        Assertions.assertEquals("El Halils, Casablanca", kupac.getAdresa());
+        Assertions.assertEquals("karim@gmail.net.com", kupac.getMail());
+    }
+
 
 
 
