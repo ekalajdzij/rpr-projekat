@@ -42,6 +42,20 @@ public class KarteManagerTest {
         }
     }
 
+    @Test
+    void updateTest() {
+        try {
+            Prodavac p = Mockito.mock(Prodavac.class);
+            ProdavacManager pmanager = Mockito.mock(ProdavacManager.class);
+            p = pmanager.getById(1);
+            karta = new Karte(2, "Fudbalska utakmica: Argentina - Hrvatska", "13.12.2022", "Lusail Stadium, Doha", p, 1200.50);
+            Mockito.doCallRealMethod().when(karteManager).update(karta);
+        } catch(KarteException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+    }
+
 
 
 }
