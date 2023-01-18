@@ -1,11 +1,15 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.bussines.KupacManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.dao.KarteDAO;
 import ba.unsa.etf.rpr.dao.KarteDAOSQLImplementation;
 import ba.unsa.etf.rpr.dao.KupacDAO;
 import ba.unsa.etf.rpr.dao.KupacDAOSQLImplementation;
+import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +53,7 @@ public class AppFX extends Application{
             int idd = kDAO.getId("Karim Smith");
             Kupac k = kDAO.getById(idd);
             System.out.println(k);
+
             KarteDAO k = new KarteDAOSQLImplementation();
             List<String> l = k.getAllKarte();
             for (String x : l) System.out.println(x);
@@ -57,5 +62,10 @@ public class AppFX extends Application{
             Double cijena = k.dajCijenu(in);
             int pid = k.dajIdProdavcaKarte("Film");
             System.out.println(cijena);*/
+            /*KarteManager m = new KarteManager();
+            Karte karta = m.getById(6);
+            System.out.println(karta);*/
+
+
         }
 }
