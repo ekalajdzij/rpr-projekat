@@ -19,11 +19,12 @@ public class KarteManager {
     }
 
     public void delete(int id) throws KarteException {
+        //DaoFactory.karteDAO().delete(id);
         try {
             DaoFactory.karteDAO().delete(id);
-        } catch(KarteException e) {
+        } catch (KarteException e) {
             if(e.getMessage().contains("FOREIGN KEY"))
-                throw new KarteException("Cannot delete Karte which is related to Prodavac. First delete related Prodavac before deleting Karte");
+                throw new KarteException("Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.");
             throw e;
         }
     }
@@ -37,8 +38,13 @@ public class KarteManager {
         DaoFactory.karteDAO().update(k);
     }
     public Karte add (Karte k) throws KarteException {
+        if (k.getId() != 0) throw new KarteException("Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen");
         validateKarteVrsta(k.getVrsta());
-        return DaoFactory.karteDAO().add(k);
+        try {
+            return DaoFactory.karteDAO().add(k);
+        } catch(KarteException e) {
+            throw e;
+        }
     }
 
     public int dajIdProdavcaKarte(String vrsta) throws KarteException {
