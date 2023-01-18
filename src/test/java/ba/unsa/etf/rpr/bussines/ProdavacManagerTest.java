@@ -63,6 +63,13 @@ public class ProdavacManagerTest {
             Assertions.assertTrue(false);
         }
     }
+    @Test
+    void deleteTest() throws KarteException {
+        Mockito.doCallRealMethod().when(prodavacManager).delete(12);
+        KarteException exception = Assertions.assertThrows(KarteException.class, ()-> {
+            prodavacManager.delete(12);},"Cannot delete Prodavac which is related to Karte. First delete related Karte before deleting Prodavac");
+        Assertions.assertEquals("Cannot delete Prodavac which is related to Karte. First delete related Karte before deleting Prodavac",exception.getMessage());
+    }
 
 
 }
