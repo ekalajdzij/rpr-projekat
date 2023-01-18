@@ -56,6 +56,15 @@ public class KarteManagerTest {
         }
     }
 
+    @Test
+    void deleteTest() throws KarteException {
+        Mockito.doCallRealMethod().when(karteManager).delete(2);
+        KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
+            karteManager.delete(2);}, "Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.");
+        Assertions.assertEquals("Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.",exception.getMessage());
+    }
+
+
 
 
 }
