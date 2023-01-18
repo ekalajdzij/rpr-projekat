@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr.domain;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Karte implements Idable{
     private int id;
     private String vrsta;
@@ -13,8 +17,8 @@ public class Karte implements Idable{
         this.prodavac = prodavac_id;
         this.cijena = cijena;
     }
-    public Karte() {}
-
+    public Karte() {
+    }
     public String getVrsta() {
         return vrsta;
     }
@@ -65,6 +69,11 @@ public class Karte implements Idable{
 
     @Override
     public String toString() {
+        return vrsta;
+    }
+
+    /*@Override
+    public String toString() {
         return "Karte{" +
                 "id = " + id +
                 ", vrsta = " + vrsta +
@@ -73,5 +82,5 @@ public class Karte implements Idable{
                 ", prodavac = " + prodavac.getIme() +
                 ", cijena = " + cijena +
                 '}';
-    }
+    }*/
 }
