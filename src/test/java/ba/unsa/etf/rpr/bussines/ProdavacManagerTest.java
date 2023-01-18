@@ -53,7 +53,16 @@ public class ProdavacManagerTest {
                 "Ime prodavca mora biti izmedju 3 i 50 karaktera!");
         Assertions.assertEquals("Ime prodavca mora biti izmedju 3 i 50 karaktera!", keks2.getMessage());
     }
-
+    @Test
+    void updateTest() {
+        try {
+            prodavac = new Prodavac(10,"Elvis John Presley", "+33 123 444 55", "kraljiliking@mail");
+            Mockito.doCallRealMethod().when(prodavacManager).update(prodavac);
+        } catch (KarteException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+    }
 
 
 }
