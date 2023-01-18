@@ -38,6 +38,14 @@ public class KupacManagerTest {
             kupacManager.validateKupacIme(neispravno_ime);},"Ime kupca mora biti izmedju 3 i 50 karaktera!");
         Assertions.assertEquals("Ime kupca mora biti izmedju 3 i 50 karaktera!",exception.getMessage());
     }
+    @Test
+    void getAllTest() throws KarteException {
+        kupacManager = new KupacManager();
+        kupac = kupacManager.getById(1);
+        kupci = kupacManager.getAll();
+        Assertions.assertEquals(1,kupci.get(0).getId());
+        Assertions.assertEquals("Karim Smith", kupci.get(0).getIme());
+    }
 
 
 
