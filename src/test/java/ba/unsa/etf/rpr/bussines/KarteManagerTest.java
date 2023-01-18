@@ -98,6 +98,14 @@ public class KarteManagerTest {
         daoFactoryMockedStatic.close();
 
     }
+    @Test
+    void getAllTest() throws KarteException {
+        KarteManager manager = new KarteManager();
+        List<String> imena = manager.getAllKarte();
+        Assertions.assertEquals("Fudbalska utakmica: Milan - Inter",imena.get(5));
+
+    }
+
 
 
 
