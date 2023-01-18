@@ -18,14 +18,7 @@ public class KupacManager {
     }
 
     public void delete (int id) throws KarteException {
-        try {
-            DaoFactory.kupacDAO().delete(id);
-        } catch (KarteException e) {
-            if(e.getMessage().contains("FOREIGN KEY"))
-                throw new KarteException("Cannot delete Kupac which is related to Prodavac & Karte. First delete related Prodavac & Karte before deleting Kupac. ");
-            throw e;
-        }
-
+        DaoFactory.kupacDAO().delete(id);
     }
 
     public Kupac getById(int id) throws KarteException {
@@ -38,8 +31,13 @@ public class KupacManager {
     }
 
     public Kupac add(Kupac k) throws KarteException {
+        if (k.getId() != 0) throw new KarteException("Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen");
         validateKupacIme(k.getIme());
-        return DaoFactory.kupacDAO().add(k);
+        try {
+            return DaoFactory.kupacDAO().add(k);
+        } catch(KarteException e) {
+            throw e;
+        }
     }
 
     public int getId(String ime) throws KarteException {
