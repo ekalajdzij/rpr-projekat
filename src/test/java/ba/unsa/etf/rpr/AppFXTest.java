@@ -18,8 +18,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for simple App.
  */
-public class AppFXTest
-{
+public class AppFXTest {
 
     @Test
     public void test1() throws KarteException {
@@ -43,7 +42,14 @@ public class AppFXTest
         Assertions.assertEquals("El Halils, Casablanca", kupac.getAdresa());
         Assertions.assertEquals("karim@gmail.net.com", kupac.getMail());
     }
-
+    @Test
+    public void test3() throws KarteException {
+        KarteManager karteManager = new KarteManager();
+        Karte karta = karteManager.getById(6);
+        Assertions.assertEquals("31.12.2022", karta.getDatum());
+        Assertions.assertEquals("San Siro stadion, Milano, Italija", karta.getAdresa());
+        Assertions.assertEquals(100, karta.getCijena());
+    }
 
 
 
