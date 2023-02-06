@@ -49,6 +49,23 @@ public class AppFXTest {
         Assertions.assertEquals(100, karta.getCijena());
     }
 
+    /**
+     * Test for KupacUpdate
+     */
+    @Test
+    public void test4() throws KarteException {
+        KupacManager kupacManager = new KupacManager();
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(1);
+        KarteManager km = new KarteManager();
+        Karte k = km.getById(1);
+        Kupac kupac = new Kupac(2,"John Johnny Lennon", "johnny123@gmail.net", "Los Angeles, California", "+91 111 112", p, k);
+        kupacManager.update(kupac);
+        Assertions.assertEquals("+91 111 112", kupac.getTelefon());
+        Assertions.assertEquals("John Johnny Lennon", kupac.getIme());
+
+    }
+
 
 
 
