@@ -32,17 +32,16 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
 
     @Override
     public int getId(String ime) throws KarteException {
+        String sql = "SELECT id FROM Kupac WHERE ime = ?";
         try {
-            //Connection connection = Database.getConnection();
-            Connection connection = getConnection();
-            String sql = "SELECT id FROM Kupac WHERE ime = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,ime);
+            PreparedStatement ps = this.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setObject(1,ime);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
-                int id = rs.getInt("id");
-                return id;
-            }}
+                return rs.getInt("id");
+
+            }
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
@@ -55,6 +54,9 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
             Kupac k = new Kupac();
             k.setId(rs.getInt("id"));
             k.setIme(rs.getString("ime"));
+            k.setMail(rs.getString("mail"));
+            k.setAdresa(rs.getString("adresa"));
+            k.setTelefon(rs.getString("telefon"));
             return k;
         } catch (SQLException e) {
             throw new KarteException(e.getMessage(), e);
@@ -66,6 +68,9 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
         Map<String, Object> row = new TreeMap<>();
         row.put("id", object.getId());
         row.put("ime", object.getIme());
+        row.put("mail", object.getMail());
+        row.put("adresa", object.getAdresa());
+        row.put("telefon", object.getTelefon());
         return row;
     }
 
@@ -74,118 +79,52 @@ public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements Kup
 
      @Override
     public Kupac getById(int id) throws KarteException {
-        try {Connection connection = getConnection();
-            //Connection connection = Database.getConnection();
-        Kupac kupac = null;
-        String sql = "SELECT id, ime, mail, adresa, telefon, Prodavac_id, Karta_id FROM Kupac WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1,id);
-        ResultSet rs =  ps.executeQuery();
-        if (rs.next()) {
-            int oid = rs.getInt("id");
-            String ime = rs.getString("ime");
-            String mail = rs.getString("mail");
-            String adresa = rs.getString("adresa");
-            String telefon = rs.getString("telefon");
+         Kupac kupac = null;
+         String sql = "SELECT id, ime, mail, adresa, telefon, Prodavac_id, Karta_id FROM Kupac WHERE id = ?";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,id);
+            ResultSet rs =  ps.executeQuery();
+            if (rs.next()) {
+                int oid = rs.getInt("id");
+                String ime = rs.getString("ime");
+                String mail = rs.getString("mail");
+                String adresa = rs.getString("adresa");
+                String telefon = rs.getString("telefon");
 
-            ProdavacManager managerZaProdavca = new ProdavacManager();
-            Prodavac prodavac = managerZaProdavca.getById(rs.getInt("Prodavac_id"));
-            KarteManager managerZaKarte = new KarteManager();
-            Karte karta = managerZaKarte.getById(rs.getInt("Karta_id"));
-            return new Kupac(oid,ime,mail,adresa,telefon,prodavac,karta);
-        }} catch(SQLException e) {
+                ProdavacManager managerZaProdavca = new ProdavacManager();
+                Prodavac prodavac = managerZaProdavca.getById(rs.getInt("Prodavac_id"));
+                KarteManager managerZaKarte = new KarteManager();
+                Karte karta = managerZaKarte.getById(rs.getInt("Karta_id"));
+                return new Kupac(oid,ime,mail,adresa,telefon,prodavac,karta);
+            }
+        } catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
         return null;
     }
 
-    /* @Override
-    public List<Kupac> getAll() throws KarteException {
-       try { Connection connection = Database.getConnection();
-        String sql = "SELECT id, ime, mail, adresa, telefon, Prodavac_id FROM Kupac";
-        List<Kupac> kupci = new ArrayList<>();
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String ime = rs.getString("ime");
-            String mail = rs.getString("mail");
-            String adresa = rs.getString("adresa");
-            String telefon = rs.getString("telefon");
-            ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
-            Prodavac prodavac = prodavacDAO.getById(rs.getInt("Prodavac_id"));
-            KarteDAO karteDAO = new KarteDAOSQLImplementation();
-            Karte karta = karteDAO.getById(rs.getInt("Karta_id"));
-            Kupac kupac = new Kupac(id,ime,mail,adresa,telefon,prodavac,karta);
-            kupci.add(kupac);
-        }
-        return kupci;}
-       catch(SQLException e) {
-           throw new KarteException(e.getMessage(),e);
-       }
-    }
-
-*/
     @Override
     public Kupac add(Kupac kupac) throws KarteException {
-        try {Connection connection = Database.getConnection();
         String sql = "INSERT INTO Kupac (id,ime,mail,adresa,telefon,Prodavac_id,Karta_id) VALUES (?,?,?,?,?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1,kupac.getId());
-        ps.setString(2,kupac.getIme());
-        ps.setString(3,kupac.getMail());
-        ps.setString(4,kupac.getAdresa());
-        ps.setString(5, kupac.getTelefon());
-        ps.setInt(6,kupac.getProdavac().getId());
-        ps.setInt(7,kupac.getKarta().getId());
-
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(connection);
-
-        return kupac;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-    }
-/*
-    @Override
-    public int update(Kupac kupac) throws KarteException {
-        try {Connection connection = Database.getConnection();
-        String sql = "UPDATE Kupac set ime = ?, mail = ?, adresa = ?, telefon = ?, Prodavac_id = ?, Karta_id = ? WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1,kupac.getIme());
-        ps.setString(2,kupac.getMail());
-        ps.setString(3,kupac.getAdresa());
-        ps.setString(4,kupac.getTelefon());
-        ps.setInt(5,kupac.getProdavac().getId());
-        ps.setInt(6,kupac.getKarta().getId());
-        ps.setInt(6,kupac.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(connection);
-        return rez;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-    }
-
-    @Override
-    public int delete(Kupac kupac) throws KarteException {
         try {
-            Connection connection = Database.getConnection();
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,kupac.getId());
+            ps.setObject(2,kupac.getIme());
+            ps.setObject(3,kupac.getMail());
+            ps.setObject(4,kupac.getAdresa());
+            ps.setObject(5, kupac.getTelefon());
+            ps.setObject(6,kupac.getProdavac().getId());
+            ps.setObject(7,kupac.getKarta().getId());
 
-        String sql = "DELETE FROM Kupac WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1,kupac.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(connection);
-        return rez; }
+            ps.executeUpdate();
+
+            return kupac;
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
+    }
 
-    } */
 
 }
