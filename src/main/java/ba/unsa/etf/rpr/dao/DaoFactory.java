@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr.dao;
 
+/**
+ * The type Dao factory
+ */
 public class DaoFactory {
     private static final KarteDAO karteDao = new KarteDAOSQLImplementation();
     private static final KupacDAO kupacDao = new KupacDAOSQLImplementation();
