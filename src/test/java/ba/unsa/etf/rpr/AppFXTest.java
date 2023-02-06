@@ -18,6 +18,10 @@ import org.junit.jupiter.api.Test;
 
 public class AppFXTest {
 
+    /**
+     * Test for getId for all dao implementations
+     * @throws KarteException if an error occurs with the database
+     */
     @Test
     public void test1() throws KarteException {
         KupacManager kupacManager = new KupacManager();
@@ -32,6 +36,11 @@ public class AppFXTest {
         Karte karta = karteManager.getById(1);
         Assertions.assertEquals(1,karta.getId());
     }
+
+    /**
+     * Test for methods of Kupac class
+     * @throws KarteException if an error occurs with the database
+     */
     @Test
     public void test2() throws KarteException {
         KupacManager kupacManager = new KupacManager();
@@ -40,6 +49,12 @@ public class AppFXTest {
         Assertions.assertEquals("El Halils, Casablanca", kupac.getAdresa());
         Assertions.assertEquals("karim@gmail.net.com", kupac.getMail());
     }
+
+
+    /**
+     * Test for methods of Karte class
+     * @throws KarteException if an error occurs with the database
+     */
     @Test
     public void test3() throws KarteException {
         KarteManager karteManager = new KarteManager();
