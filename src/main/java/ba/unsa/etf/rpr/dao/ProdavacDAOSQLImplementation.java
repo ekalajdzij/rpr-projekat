@@ -8,19 +8,35 @@ import java.sql.*;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The type of Kupac dao sql implementation.
+ */
+
 public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implements ProdavacDAO {
 
     private static ProdavacDAOSQLImplementation instance = null;
     private ProdavacManager manager = new ProdavacManager();
+
+    /**
+     * Instantiates a new ProdavacDAOSql object.
+     */
     public ProdavacDAOSQLImplementation() {
         super("Prodavac");
     }
 
+    /**
+     * Gets instance
+     *
+     * @return the instance
+     */
     public static ProdavacDAOSQLImplementation getInstance() {
         if (instance == null) instance = new ProdavacDAOSQLImplementation();
         return instance;
     }
 
+    /**
+     * Remove the instance
+     */
     public static void removeInstance() {
         if(instance != null) instance = null;
     }
