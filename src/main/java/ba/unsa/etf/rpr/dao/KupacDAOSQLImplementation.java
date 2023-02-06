@@ -12,20 +12,34 @@ import java.sql.*;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The type of Kupac dao sql implementation.
+ */
 public class KupacDAOSQLImplementation extends AbstractDAO<Kupac> implements KupacDAO {
 
     private static KupacDAOSQLImplementation instance = null;
     private KupacManager manager = new KupacManager();
 
+    /**
+     * Instantiates a new KupacDAOSql object.
+     */
     public KupacDAOSQLImplementation() {
         super("Kupac");
     }
 
+    /**
+     * Gets instance
+     *
+     * @return the instance
+     */
     public static KupacDAOSQLImplementation getInstance() {
         if(instance == null) instance = new KupacDAOSQLImplementation();
         return instance;
     }
 
+    /**
+     * Remove the instance
+     */
     public static void removeInstance() {
         if (instance != null) instance = null;
     }
