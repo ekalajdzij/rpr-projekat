@@ -12,22 +12,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
+/**
+ * The type of Karte dao sql implementation.
+ */
 
 public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO {
     private static KarteDAOSQLImplementation instance = null;
     private KarteManager manager = new KarteManager();
 
-
+    /**
+     * Instantiates a new KarteDAOSql object
+     */
     public KarteDAOSQLImplementation() {super("Karte");}
 
-
+    /**
+     * Gets instance
+     *
+     * @return the instance
+     */
     public static KarteDAOSQLImplementation getInstance() {
         if(instance == null) instance = new KarteDAOSQLImplementation();
         return instance;
     }
 
-
+    /**
+     * Remove instance
+     */
     public static void removeInstance() {
         if (instance != null) instance = null;
     }
@@ -44,16 +54,16 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         } catch (SQLException e) {
             throw new KarteException(e.getMessage(), e);
         } }
-        @Override
-        public Map<String, Object> object2row(Karte object) {
-            Map<String, Object> row = new TreeMap<>();
-            row.put("id", object.getId());
-            row.put("vrsta", object.getVrsta());
-            row.put("datum",object.getDatum());
-            row.put("adresa",object.getAdresa());
-            row.put("cijena",object.getCijena());
-            return row;
-        }
+    @Override
+    public Map<String, Object> object2row(Karte object) {
+        Map<String, Object> row = new TreeMap<>();
+        row.put("id", object.getId());
+        row.put("vrsta", object.getVrsta());
+        row.put("datum",object.getDatum());
+        row.put("adresa",object.getAdresa());
+        row.put("cijena",object.getCijena());
+        return row;
+    }
 
 
     @Override
@@ -181,5 +191,5 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         }
         return (double) -1;
     }
-    }
+}
 
