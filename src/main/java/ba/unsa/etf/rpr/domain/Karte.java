@@ -72,15 +72,4 @@ public class Karte implements Idable{
         return vrsta;
     }
 
-    /*@Override
-    public String toString() {
-        return "Karte{" +
-                "id = " + id +
-                ", vrsta = " + vrsta +
-                ", datum = " + datum +
-                ", adresa = " + adresa  +
-                ", prodavac = " + prodavac.getIme() +
-                ", cijena = " + cijena +
-                '}';
-    }*/
 }

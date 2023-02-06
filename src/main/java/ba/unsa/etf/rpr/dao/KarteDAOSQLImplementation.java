@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.bussines.KarteManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
@@ -69,11 +70,10 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public List<Karte> getAll() throws KarteException{
+        List<Karte> karte = new ArrayList<>();
+        String sql = "SELECT id,vrsta,datum,adresa,cijena,Prodavac_id FROM Karte";
         try {
-            Connection con = Database.getConnection();
-            String sql = "SELECT id,vrsta,datum,adresa,cijena,Prodavac_id FROM Karte";
-            List<Karte> karte = new ArrayList<>();
-            Statement stmt = con.createStatement();
+            PreparedStatement stmt = this.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 int oid = rs.getInt("id");
@@ -81,8 +81,8 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
                 String datum = rs.getString("datum");
                 String adresa = rs.getString("adresa");
                 Double cijena = rs.getDouble("cijena");
-                ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
-                Prodavac prodavac = prodavacDAO.getById(rs.getInt("Prodavac_id"));
+                ProdavacManager prodavacManager = new ProdavacManager();
+                Prodavac prodavac = prodavacManager.getById(rs.getInt("Prodavac_id"));
                 Karte karta = new Karte(oid, vrsta, datum, adresa, prodavac, cijena);
                 karte.add(karta);
             }
@@ -94,68 +94,27 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public Karte add(Karte karte) throws KarteException {
-        try {Connection con = Database.getConnection();
         String sql = "INSERT INTO Karte (id, vrsta, datum, adresa, cijena, Prodavac_id) VALUES (?,?,?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1,karte.getId());
-        ps.setString(2,karte.getVrsta());
-        ps.setString(3,karte.getDatum());
-        ps.setString(4,karte.getAdresa());
-        ps.setDouble(5, karte.getCijena());
-        ps.setInt(6,karte.getProdavac().getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(con);
-        return karte;}
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setObject(1,karte.getId());
+            ps.setObject(2,karte.getVrsta());
+            ps.setObject(3,karte.getDatum());
+            ps.setObject(4,karte.getAdresa());
+            ps.setObject(5, karte.getCijena());
+            ps.setObject(6,karte.getProdavac().getId());
+            ps.executeUpdate();
+            return karte;
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
 
-    /*
-    @Override
-    public int update(Karte karte) throws KarteException{
-        try {Connection con = Database.getConnection();
-        String sql = "UPDATE Karte set vrsta = ?, datum = ?, adresa = ?, cijena = ?, Prodavac_id = ? WHERE id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1,karte.getVrsta());
-        ps.setString(2,karte.getDatum());
-        ps.setString(3,karte.getAdresa());
-        ps.setDouble(4, karte.getCijena());
-        ps.setInt(5,karte.getProdavac().getId());
-        ps.setInt(6,karte.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(con);
-        return rez;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-    }
-
-    @Override
-    public int delete(Karte karte) throws KarteException {
-        try {Connection con = Database.getConnection();
-        String sql = "DELETE FROM Karte WHERE id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1,karte.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(con);
-        return rez;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-
-
-    } */
     @Override
     public List<String> getAllKarte() throws KarteException{
-        //Karte k = new Karte();
-        //KarteDAO kDA0 = new KarteDAOSQLImplementation();
         List<String> lista = new ArrayList<>();
         List<Karte> list = manager.getAll();
-        //List<Karte> list = kDA0.getAll();
         for (Karte x : list)
             lista.add(x.getVrsta());
         return lista;
@@ -163,15 +122,13 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public int dajIdKarte(String vrsta) throws KarteException {
+        String sql = "SELECT id FROM Karte WHERE vrsta = ?";
         try {
-            Connection connection = getConnection();
-            String sql = "SELECT id FROM Karte WHERE vrsta = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,vrsta);
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,vrsta);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
-                return id;
+                return rs.getInt("id");
             }
         } catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
@@ -181,15 +138,15 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public int dajIdProdavcaKarte(String vrsta) throws KarteException {
-        try {Connection connection = getConnection();
         String sql = "SELECT Prodavac_id FROM Karte WHERE vrsta = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1,vrsta);
-        ResultSet rs = ps.executeQuery();
-        if(rs.next()) {
-            int id = rs.getInt("Prodavac_id");
-            return id;
-        } }
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,vrsta);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return rs.getInt("Prodavac_id");
+            }
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
@@ -197,19 +154,19 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
     }
     @Override
     public Double dajCijenu(int id) throws KarteException {
-        try {Connection connection = getConnection();
         String sql = "SELECT cijena FROM Karte WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1,id);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            Double ciena = rs.getDouble("cijena");
-            return ciena;
-        } }
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("cijena");
+            }
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
-        return Double.valueOf(-1);
+        return (double) -1;
     }
     }
 
