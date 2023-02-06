@@ -12,15 +12,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
+
 public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements KarteDAO {
     private static KarteDAOSQLImplementation instance = null;
     private KarteManager manager = new KarteManager();
+
+
     public KarteDAOSQLImplementation() {super("Karte");}
+
 
     public static KarteDAOSQLImplementation getInstance() {
         if(instance == null) instance = new KarteDAOSQLImplementation();
         return instance;
     }
+
+
     public static void removeInstance() {
         if (instance != null) instance = null;
     }
@@ -30,6 +37,9 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
             Karte k = new Karte();
             k.setId(rs.getInt("id"));
             k.setVrsta(rs.getString("vrsta"));
+            k.setDatum(rs.getString("datum"));
+            k.setAdresa(rs.getString("adresa"));
+            k.setCijena(rs.getDouble("cijena"));
             return k;
         } catch (SQLException e) {
             throw new KarteException(e.getMessage(), e);
@@ -39,6 +49,9 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
             Map<String, Object> row = new TreeMap<>();
             row.put("id", object.getId());
             row.put("vrsta", object.getVrsta());
+            row.put("datum",object.getDatum());
+            row.put("adresa",object.getAdresa());
+            row.put("cijena",object.getCijena());
             return row;
         }
 
