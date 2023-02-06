@@ -15,14 +15,30 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * The type Abstract dao.
+ *
+ * @param <T> the type parameter
+ */
+
 public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
     private static Connection connection;
     private String tableName;
+
+    /**
+     * Instantiates a new Abstract dao.
+     *
+     * @param tableName stands for the name of the table
+     */
 
     public AbstractDAO(String tableName) {
         this.tableName = tableName;
         if(connection == null) createConnection();
     }
+
+    /**
+     * Creates the connection with the database through the data stored in .properties file
+     */
     private static void createConnection() {
         if(AbstractDAO.connection == null) {
             try (InputStream input = new FileInputStream("login.properties")) {
@@ -39,7 +55,17 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
         }
     }
 
+    /**
+     * Gets the connection
+     *
+     * @return the connection to the database
+     */
     public Connection getConnection() {return AbstractDAO.connection;}
+
+
+    /**
+     * Closes the connection to the database
+     */
     public static void closeConnection() {
         System.out.println("Pozvana metoda za zatvaranje konekcije");
         if (connection != null) {
@@ -51,12 +77,35 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
             }
         }
     }
-   // public void setConnection(Connection connection){
-       // this.connection = connection;
-    //}
+
+
+    /**
+     * Method for mapping ResultSet into Object
+     *
+     * @param rs - result set from the database
+     * @return - returns a Bean object for specific table
+     * @throws KarteException in case of error with the database
+     */
     public abstract T row2object(ResultSet rs) throws KarteException;
+
+
+    /**
+     * Method for mapping Object into Map
+     *
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     public abstract Map<String, Object> object2row(T object);
 
+
+    /**
+     * Utility method for executing any kind of query
+     *
+     * @param upit - SQL query
+     * @param params - parameters for the query
+     * @return List of objects from the database
+     * @throws KarteException in case of an error with the database
+     */
     public List<T> executeQuery(String upit, Object[] params) throws KarteException {
         try {
             PreparedStatement stmt = getConnection().prepareStatement(upit);
@@ -74,6 +123,14 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
         }
     }
 
+    /**
+     * Utility method for query execution that always returns single record
+     *
+     * @param upit - query that returns single record
+     * @param params - list of parameters for the sql query
+     * @return Object t
+     * @throws KarteException in case when the object is not found
+     */
     public T executeQueryUnique(String upit, Object[] params) throws KarteException {
         List<T> result = executeQuery(upit,params);
         if (result != null && result.size() == 1) {
@@ -83,6 +140,12 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
         }
     }
 
+
+    /**
+     * Accepts KV storage of colomuns names and returns CSV of columns and question marks for insert statement
+     *
+     * Example: (id, name, date) ?,?,?
+     */
     private Map.Entry<String,String> prepareInsertParts(Map<String,Object> row) {
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
@@ -100,6 +163,12 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
         return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
+    /**
+     * Prepare columns for update statement id=?, name=?, ...
+     *
+     * @param row - row to be converted into string
+     * @return String for update statement
+     */
     private String prepareUpdateParts(Map<String, Object> row){
         StringBuilder columns = new StringBuilder();
 
