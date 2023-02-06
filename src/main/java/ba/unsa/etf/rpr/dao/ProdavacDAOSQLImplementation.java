@@ -26,15 +26,15 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
     }
 
     public int getId(String ime) throws KarteException {
-        try {Connection connection = getConnection();
-            String sql = "SELECT id FROM Prodavac WHERE ime = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,ime);
+        String sql = "SELECT id FROM Prodavac WHERE ime = ?";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,ime);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
-                int id = rs.getInt("id");
-                return id;
-            } }
+                return rs.getInt("id");
+            }
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
@@ -47,6 +47,8 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
             Prodavac p = new Prodavac();
             p.setId(rs.getInt("id"));
             p.setIme(rs.getString("ime"));
+            p.setTelefon(rs.getString("telefon"));
+            p.setMail(rs.getString("mail"));
             return p;
         } catch (SQLException e) {
             throw new KarteException(e.getMessage(), e);
@@ -58,105 +60,47 @@ public class ProdavacDAOSQLImplementation extends AbstractDAO<Prodavac> implemen
         Map<String, Object> row = new TreeMap<>();
         row.put("id", object.getId());
         row.put("ime", object.getIme());
+        row.put("telefon", object.getTelefon());
+        row.put("mail",object.getMail());
         return row;
     }
      @Override
     public Prodavac getById(int id) throws KarteException {
-        try {Connection con = Database.getConnection();
-        Prodavac prodavac = null;
-        String sql = "SELECT id, ime, telefon, mail FROM Prodavac WHERE id = ? ";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1,id);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            int oid = rs.getInt("id");
-            String ime = rs.getString("ime");
-            String telefon = rs.getString("telefon");
-            String mail = rs.getString("mail");
-            prodavac = new Prodavac(oid,ime,telefon,mail);
+         Prodavac prodavac = null;
+         String sql = "SELECT id, ime, telefon, mail FROM Prodavac WHERE id = ? ";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int oid = rs.getInt("id");
+                String ime = rs.getString("ime");
+                String telefon = rs.getString("telefon");
+                String mail = rs.getString("mail");
+                prodavac = new Prodavac(oid,ime,telefon,mail);
+            }
+            return prodavac;
         }
-        return prodavac;}
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
-/*
-    @Override
-    public List<Prodavac> getAll() throws KarteException {
-        try {Connection con = Database.getConnection();                //povezemo se sa bazom
-        String sql = "SELECT id, ime, telefon, mail FROM Prodavac";//nas sql upit
-        List<Prodavac> prodavci = new ArrayList<>();                //napravimo listu tipa Prodavac
-        Statement stmt = con.createStatement();                     //formiramo statement & izvrsimo upit
-        ResultSet rs = stmt.executeQuery(sql);
-
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String ime = rs.getString("ime");
-            String telefon = rs.getString("telefon");       //ubacujemo u listu
-            String mail = rs.getString("mail");
-            Prodavac prod = new Prodavac(id,ime,telefon,mail);
-            prodavci.add(prod);
-        }
-        return prodavci;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-    }
-*/
     @Override
     public Prodavac add(Prodavac prodavac) throws KarteException {
-        try {Connection con = Database.getConnection();
         String sql = "INSERT INTO Prodavac (id, ime, telefon, mail) VALUES (?,?, ?, ?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1,prodavac.getId());
-        ps.setString(2, prodavac.getIme());
-        ps.setString(3, prodavac.getTelefon());
-        ps.setString(4, prodavac.getMail());
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1,prodavac.getId());
+            ps.setObject(2, prodavac.getIme());
+            ps.setObject(3, prodavac.getTelefon());
+            ps.setObject(4, prodavac.getMail());
 
-        int rez = ps.executeUpdate();
-
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(con);
-        return prodavac;}
+            ps.executeUpdate();
+            return prodavac;
+        }
         catch(SQLException e) {
             throw new KarteException(e.getMessage(),e);
         }
     }
-/*
-    @Override
-    public int update(Prodavac prodavac) throws KarteException {
-        try {Connection connection = Database.getConnection();
-        String sql = "UPDATE Prodavac set ime = ?, telefon = ?, mail = ? WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, prodavac.getIme());
-        ps.setString(2, prodavac.getTelefon());
-        ps.setString(3, prodavac.getMail());
-        ps.setInt(4,prodavac.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(connection);
-        return rez;}
-        catch(SQLException e) {
-            throw new KarteException(e.getMessage(),e);
-        }
-
-    }
-
-    @Override
-    public int delete(Prodavac prodavac) throws KarteException {
-       try { Connection connection = Database.getConnection();
-        String sql = "DELETE FROM Prodavac WHERE id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1,prodavac.getId());
-        int rez = ps.executeUpdate();
-        Database.closePreparedStatement(ps);
-        Database.closeConnection(connection);
-        return rez;}
-       catch(SQLException e) {
-           throw new KarteException(e.getMessage(),e);
-       }
-
-
-    } */
 
 }
