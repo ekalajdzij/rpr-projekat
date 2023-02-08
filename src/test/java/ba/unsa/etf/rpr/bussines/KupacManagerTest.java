@@ -76,18 +76,12 @@ public class KupacManagerTest {
 
     }
     @Test
-    public void updateTest() throws KarteException {
-        ProdavacManager prodavacManager = Mockito.mock(ProdavacManager.class);
-        KarteManager karteManager = Mockito.mock(KarteManager.class);
-        Prodavac p = prodavacManager.getById(1);
-        Karte k = karteManager.getById(1);
-        Kupac kup = new Kupac(2,"John Lennon", "johnnyL@mail.com", "adresaJohhnija", "+381 333 222", p, k);
-        try {
-            Mockito.doCallRealMethod().when(kupacManager).update(kup);
-        } catch(KarteException e) {
-            e.printStackTrace();
-            Assertions.assertTrue(false);
-        }
+    public void getTelefonTest() throws KarteException {
+        KupacManager km = new KupacManager();
+        Kupac k = km.getById(5);
+        String expected = "+11 22  222  2";
+        Assertions.assertEquals(expected,k.getTelefon());
+
 
     }
     @Test
