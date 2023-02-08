@@ -45,9 +45,9 @@ public class ProdavacController {
             String telefon = fieldTelefon.getText();
             String mail = fieldMail.getText();
 
-            Connection connection = Database.getConnection();
             ProdavacManager prodavacManager = new ProdavacManager();
-            //ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
+            ProdavacDAOSQLImplementation novi  = new ProdavacDAOSQLImplementation();
+            Connection connection = novi.getConnection();
             Prodavac prodavac = new Prodavac(0, ime, telefon, mail);
             prodavacManager.add(prodavac);
 

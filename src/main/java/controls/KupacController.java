@@ -21,6 +21,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class KupacController {
 
+
     public TextField fieldName;
     public TextField fieldMail;
     public TextField fieldAdresa;
@@ -48,21 +49,20 @@ public class KupacController {
             alert.showAndWait();
         }
         else {
-            Connection connection = Database.getConnection();
+            //Connection connection = Database.getConnection();
             KupacManager kupacManager = new KupacManager();
-            //KupacDAO kDAO = new KupacDAOSQLImplementation();
+            KupacDAOSQLImplementation novi = new KupacDAOSQLImplementation();
+            Connection connection = novi.getConnection();
             String ime = fieldName.getText();
             String mail = fieldMail.getText();
             String telefon = fieldTelefon.getText();
             String adresa = fieldAdresa.getText();
 
             KarteManager karteManager = new KarteManager();
-            //KarteDAO karteDAO = new KarteDAOSQLImplementation();
             int id_karte = karteManager.dajIdKarte(vrsta_odabrane_karte);
             Double cijena = karteManager.dajCijenu(id_karte);
             Karte karta = karteManager.getById(id_karte);
 
-            //ProdavacDAO pDAO = new ProdavacDAOSQLImplementation();
             ProdavacManager prodavacManager = new ProdavacManager();
             int id_prodavca = karteManager.dajIdProdavcaKarte(vrsta_odabrane_karte);
             Prodavac prodavac = prodavacManager.getById(id_prodavca);
