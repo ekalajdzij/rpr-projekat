@@ -5,6 +5,8 @@ import ba.unsa.etf.rpr.exceptions.KarteException;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
 
@@ -41,13 +43,14 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
      */
     private static void createConnection() {
         if(AbstractDAO.connection == null) {
-            try (InputStream input = new FileInputStream("src/main/resources/login.properties")) {
-                Properties prop = new Properties();
-                prop.load(input);
-                String url = prop.getProperty("db.url");
-                String user = prop.getProperty("db.user");
-                String password = prop.getProperty("db.password");
-                AbstractDAO.connection = DriverManager.getConnection(url,user,password);
+            try (
+                    InputStream input = Files.newInputStream(Paths.get("C:\\Users\\Emir\\IdeaProjects\\rpr-projekat\\src\\main\\resources\\login.properties"))) {
+                    Properties prop = new Properties();
+                    prop.load(input);
+                    String url = prop.getProperty("db.url");
+                    String user = prop.getProperty("db.user");
+                    String password = prop.getProperty("db.password");
+                    AbstractDAO.connection = DriverManager.getConnection(url,user,password);
             }  catch (Exception io) {
                 io.printStackTrace();
                 System.exit(0);
