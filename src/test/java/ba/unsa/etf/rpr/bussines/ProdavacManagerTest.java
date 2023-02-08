@@ -92,24 +92,11 @@ public class ProdavacManagerTest {
     }
     @Test
     public void add() throws KarteException {
-        /*
-        Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
-         */
-        MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
-        daoFactoryMockedStatic.when(DaoFactory::prodavacDAO).thenReturn(prodavacDAOSQLImplementation);
-        when(DaoFactory.prodavacDAO().getAll()).thenReturn(prodavci);
-        /*
-        Bacit ce se izuzetak jer instanca Prodavac.java class ima value za id
-         */
-        prodavac = new Prodavac(30,"","","");
-        Mockito.doCallRealMethod().when(prodavacManager).add(prodavac);
-        KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
-                    prodavacManager.add(prodavac);},
-                "Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen");
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = new Prodavac(77,"","","");
+        KarteException exception = Assertions.assertThrows(KarteException.class, ()-> {
+            pm.add(p);
+        },"Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen");
         Assertions.assertEquals("Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
-        daoFactoryMockedStatic.verify(DaoFactory::prodavacDAO);
-        Mockito.verify(prodavacManager).add(prodavac);
-        daoFactoryMockedStatic.close();
     }
-
 }
