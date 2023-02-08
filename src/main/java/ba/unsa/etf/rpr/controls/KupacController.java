@@ -49,7 +49,7 @@ public class KupacController {
             alert.showAndWait();
         }
         else {
-            //Connection connection = Database.getConnection();
+
             KupacManager kupacManager = new KupacManager();
             KupacDAOSQLImplementation novi = new KupacDAOSQLImplementation();
             Connection connection = novi.getConnection();
@@ -67,8 +67,8 @@ public class KupacController {
             int id_prodavca = karteManager.dajIdProdavcaKarte(vrsta_odabrane_karte);
             Prodavac prodavac = prodavacManager.getById(id_prodavca);
 
-           Kupac k = new Kupac();
-            k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
+           //Kupac k = new Kupac();
+            Kupac k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
             kupacManager.add(k);
 
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupio.fxml"));
