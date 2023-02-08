@@ -30,22 +30,36 @@ public class KupacManagerTest {
     }
 
     @Test
-    void validateImeKupca() throws KarteException {
+    public void mockitoTest() throws KarteException {
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(1);
+        KarteManager km = new KarteManager();
+        Karte k = km.getById(1);
+        Mockito.when(kupacManager.getById(1)).thenReturn(new Kupac());
+        Kupac expected = new Kupac();
+        Kupac actual = kupacManager.getById(1);
+        Assertions.assertEquals(expected.getIme(),actual.getIme());
+        Assertions.assertEquals(expected.getTelefon(),actual.getTelefon());
+
+    }
+
+    @Test
+    public void validateImeKupca() throws KarteException {
+        KupacManager km = new KupacManager();
         String ispravno_ime = "John Johnson";
         try {
-            Mockito.doCallRealMethod().when(kupacManager).validateKupacIme(ispravno_ime);
+           km.validateKupacIme(ispravno_ime);
         } catch(KarteException e) {
             e.printStackTrace();
             Assertions.assertTrue(false);
         }
         String neispravno_ime = "dx";
-        Mockito.doCallRealMethod().when(kupacManager).validateKupacIme(neispravno_ime);
         KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
-            kupacManager.validateKupacIme(neispravno_ime);},"Ime kupca mora biti izmedju 3 i 50 karaktera!");
+            km.validateKupacIme(neispravno_ime);},"Ime kupca mora biti izmedju 3 i 50 karaktera!");
         Assertions.assertEquals("Ime kupca mora biti izmedju 3 i 50 karaktera!",exception.getMessage());
     }
     @Test
-    void getAllTest() throws KarteException {
+    public void getAllTest() throws KarteException {
         kupacManager = new KupacManager();
         kupac = kupacManager.getById(1);
         kupci = kupacManager.getAll();
@@ -53,7 +67,7 @@ public class KupacManagerTest {
         Assertions.assertEquals("Karim Smith", kupci.get(0).getIme());
     }
     @Test
-    void deleteTest() {
+    public void deleteTest() {
         try {
             kupac = kupacManager.getById(7);
             Mockito.doCallRealMethod().when(kupacManager).delete(7);
@@ -63,7 +77,7 @@ public class KupacManagerTest {
         }
     }
     @Test
-    void updateTest() throws KarteException {
+    public void updateTest() throws KarteException {
         ProdavacManager prodavacManager = Mockito.mock(ProdavacManager.class);
         KarteManager karteManager = Mockito.mock(KarteManager.class);
         Prodavac p = prodavacManager.getById(1);
@@ -78,7 +92,7 @@ public class KupacManagerTest {
 
     }
     @Test
-    void addTest() throws KarteException {
+    public void addTest() throws KarteException {
         /*
         Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
          */
