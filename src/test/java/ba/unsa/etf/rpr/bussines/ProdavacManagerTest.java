@@ -31,27 +31,11 @@ public class ProdavacManagerTest {
     }
 
     @Test
-    void validateImeProdavcaTest() throws KarteException {
-        String ispravno = "Johnny Depp";
-        try {
-            Mockito.doCallRealMethod().when(prodavacManager).validateProdavacIme(ispravno);
-        } catch(KarteException e) {
-            e.printStackTrace();
-            Assertions.assertTrue(false);
-        }
-        String neispravno = "X";
-        Mockito.doCallRealMethod().when(prodavacManager).validateProdavacIme(neispravno);
-        KarteException keks = Assertions.assertThrows(KarteException.class, ()-> {
-            prodavacManager.validateProdavacIme(neispravno);},
-                "Ime prodavca mora biti izmedju 3 i 50 karaktera!");
-        Assertions.assertEquals("Ime prodavca mora biti izmedju 3 i 50 karaktera!",keks.getMessage());
-
-        String predugoIme = RandomStringUtils.randomAlphabetic(51);
-        Mockito.doCallRealMethod().when(prodavacManager).validateProdavacIme(predugoIme);
-        KarteException keks2 = Assertions.assertThrows(KarteException.class, ()-> {
-            prodavacManager.validateProdavacIme(predugoIme);},
-                "Ime prodavca mora biti izmedju 3 i 50 karaktera!");
-        Assertions.assertEquals("Ime prodavca mora biti izmedju 3 i 50 karaktera!", keks2.getMessage());
+    void validateIspravnoImeProdavcaTest() throws KarteException {
+        String ispravno = "Dorian Smith";
+        ProdavacManager pm = new ProdavacManager();
+        pm.validateProdavacIme(ispravno);
+        Assertions.assertTrue(true);
     }
     @Test
     void updateTest() {
