@@ -31,14 +31,15 @@ public class ProdavacManagerTest {
     }
 
     @Test
-    void validateIspravnoImeProdavcaTest() throws KarteException {
+    public void validateIspravnoImeProdavcaTest() throws KarteException {
         String ispravno = "Dorian Smith";
         ProdavacManager pm = new ProdavacManager();
         pm.validateProdavacIme(ispravno);
         Assertions.assertTrue(true);
     }
+
     @Test
-    void updateTest() {
+    public void updateTest() {
         try {
             prodavac = new Prodavac(10,"Elvis John Presley", "+33 123 444 55", "kraljiliking@mail");
             Mockito.doCallRealMethod().when(prodavacManager).update(prodavac);
@@ -48,7 +49,7 @@ public class ProdavacManagerTest {
         }
     }
     @Test
-    void deleteTest() throws KarteException {
+    public void deleteTest() throws KarteException {
         Mockito.doCallRealMethod().when(prodavacManager).delete(12);
         KarteException exception = Assertions.assertThrows(KarteException.class, ()-> {
             prodavacManager.delete(12);},"Cannot delete Prodavac which is related to Karte. First delete related Karte before deleting Prodavac");
