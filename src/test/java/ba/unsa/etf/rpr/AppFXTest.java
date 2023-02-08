@@ -66,7 +66,7 @@ public class AppFXTest {
 
     /**
      * Test for KupacUpdate
-     * @throws KarteException if an error occurs
+     * @throws KarteException if an error occurs with the database
      */
     @Test
     public void test4() throws KarteException {
@@ -84,7 +84,7 @@ public class AppFXTest {
 
     /**
      * Test for some set methods of Karte and Kupac dao classes
-     * @throws KarteException if an error occurs
+     * @throws KarteException if an error occurs with the database
      */
     @Test
     public void test5() throws KarteException {
