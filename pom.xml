@@ -25,7 +25,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
+      <version>5.9.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -150,6 +150,9 @@
     </profile>
     <profile>
       <id>cli-app</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
       <build>
         <finalName>${project.name}-cli</finalName>
         <plugins>
