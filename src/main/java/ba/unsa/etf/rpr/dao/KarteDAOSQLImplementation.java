@@ -68,12 +68,11 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public Karte getById(int id) throws KarteException{
+        Karte karta = null;
+        String sql = "SELECT id, vrsta, datum, adresa, cijena, Prodavac_id FROM Karte WHERE id = ?";
         try {
-            Connection con = Database.getConnection();
-            Karte karta = null;
-            String sql = "SELECT id, vrsta, datum, adresa, cijena, Prodavac_id FROM Karte WHERE id = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int oid = rs.getInt("id");
