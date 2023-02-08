@@ -35,7 +35,6 @@ public class PocetnaController {
         stage.setMaxWidth(450);
         stage.setMinWidth(350);
         stage.setTitle("Karte");
-        //stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
