@@ -66,6 +66,7 @@ public class AppFXTest {
 
     /**
      * Test for KupacUpdate
+     * @throws KarteException if an error occurs
      */
     @Test
     public void test4() throws KarteException {
