@@ -67,7 +67,7 @@ public class KupacController {
             int id_prodavca = karteManager.dajIdProdavcaKarte(vrsta_odabrane_karte);
             Prodavac prodavac = prodavacManager.getById(id_prodavca);
 
-           //Kupac k = new Kupac();
+
             Kupac k = new Kupac(0,ime, mail, adresa, telefon, prodavac, karta);
             kupacManager.add(k);
 
