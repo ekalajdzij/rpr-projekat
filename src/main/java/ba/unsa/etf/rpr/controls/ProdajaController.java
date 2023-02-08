@@ -49,10 +49,11 @@ public class ProdajaController {
             String datum = fieldDatum.getText();
             String adresa = fieldAdresa.getText();
 
+            ProdavacManager prodavacManager = new ProdavacManager();
             ProdavacDAOSQLImplementation novi = new ProdavacDAOSQLImplementation();
             Connection connection = novi.getConnection();
             KarteManager karteManager = new KarteManager();
-            ProdavacManager prodavacManager = new ProdavacManager();
+
             int p_id = prodavacManager.getId(ime);
             Prodavac prodavac = prodavacManager.getById(p_id);
 
