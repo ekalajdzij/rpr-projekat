@@ -1,4 +1,4 @@
-package controls;
+package ba.unsa.etf.rpr.controls;
 
 import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.domain.Karte;
@@ -6,7 +6,6 @@ import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
