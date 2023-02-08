@@ -1,4 +1,4 @@
-package controls;
+package ba.unsa.etf.rpr.controls;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class PocetnaController {
     public Button prodajaButton;
         @FXML
     void initialize() throws FileNotFoundException {
-        Image image = new Image(new FileInputStream("src/main/resources/ticket.png"));
+        Image image = new Image(getClass().getResourceAsStream("/ticket.png"));
         fieldImage.setImage(image);
     }
 
