@@ -99,4 +99,22 @@ public class ProdavacManagerTest {
         },"Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen");
         Assertions.assertEquals("Ne moze se dodati prodavac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
     }
+
+    @Test
+    public void setTest() throws KarteException {
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(15);
+        p.setIme("Theo Pinson");
+        p.setTelefon("+91 987 65 43 1");
+        p.setMail("theopinson@office.net.uk");
+        String expected1 = "Theo Pinson";
+        String expected2 = "+91 987 65 43 1";
+        String expected3 = "theopinson@office.net.uk";
+        Assertions.assertEquals(expected1,p.getIme());
+        Assertions.assertEquals(expected2,p.getTelefon());
+        Assertions.assertEquals(expected3,p.getMail());
+
+
+
+    }
 }
