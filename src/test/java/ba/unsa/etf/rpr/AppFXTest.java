@@ -83,7 +83,7 @@ public class AppFXTest {
 
     /**
      * Test for some set methods of Karte and Kupac dao classes
-     * @throws KarteException if an error occur
+     * @throws KarteException if an error occurs
      */
     @Test
     public void test5() throws KarteException {
