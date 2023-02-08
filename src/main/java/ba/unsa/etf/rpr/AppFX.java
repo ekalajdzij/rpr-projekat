@@ -1,15 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.bussines.KarteManager;
-import ba.unsa.etf.rpr.bussines.KupacManager;
-import ba.unsa.etf.rpr.bussines.ProdavacManager;
-import ba.unsa.etf.rpr.dao.KarteDAO;
-import ba.unsa.etf.rpr.dao.KarteDAOSQLImplementation;
-import ba.unsa.etf.rpr.dao.KupacDAO;
-import ba.unsa.etf.rpr.dao.KupacDAOSQLImplementation;
-import ba.unsa.etf.rpr.domain.Karte;
-import ba.unsa.etf.rpr.domain.Kupac;
-import ba.unsa.etf.rpr.domain.Prodavac;
+
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
