@@ -97,6 +97,14 @@ public class KupacManagerTest {
        Assertions.assertEquals("Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
     }
 
+    @Test
+    public void getAdresaTest() throws KarteException {
+        KupacManager km = new KupacManager();
+        Kupac k = km.getById(4);
+        String expected = "Berlin Strasse, Berlin";
+        Assertions.assertEquals(expected,k.getAdresa());
+
+    }
 
 
 
