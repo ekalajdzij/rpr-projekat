@@ -81,6 +81,23 @@ public class AppFXTest {
 
     }
 
+    @Test
+    public void test5() throws KarteException {
+        KupacManager km = new KupacManager();
+        KarteManager karm = new KarteManager();
+        Karte karta = karm.getById(10);
+        Kupac kupac = km.getById(6);
+
+        karta.setVrsta("LA Confidential");
+        kupac.setAdresa("Ox Street, Bristol");
+
+        Assertions.assertEquals("LA Confidential", karta.getVrsta());
+        Assertions.assertEquals("Ox Street, Bristol", kupac.getAdresa());
+
+
+
+    }
+
 
 
 
