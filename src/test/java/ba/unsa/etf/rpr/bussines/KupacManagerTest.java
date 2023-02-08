@@ -82,32 +82,19 @@ public class KupacManagerTest {
         String expected = "+11 22  222  2";
         Assertions.assertEquals(expected,k.getTelefon());
 
-
     }
     @Test
     public void addTest() throws KarteException {
-        /*
-        Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
-         */
-        MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
-        daoFactoryMockedStatic.when(DaoFactory::kupacDAO).thenReturn(kupacDAOSQLImplementationMock);
-        when(DaoFactory.kupacDAO().getAll()).thenReturn(kupci);
-        /*
-        Bacit ce se izuzetak jer instanca Kupac.java class ima value za id
-         */
-        ProdavacManager prodavacManager = Mockito.mock(ProdavacManager.class);
-        KarteManager karteManager = Mockito.mock(KarteManager.class);
-        Prodavac p = prodavacManager.getById(1);
-        Karte k = karteManager.getById(1);
-        kupac = new Kupac(40,"John Lennon", "johnnyL@mail.com", "adresaJohhnija", "+381 333 222", p, k);
-        Mockito.doCallRealMethod().when(kupacManager).add(kupac);
-        KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
-                    kupacManager.add(kupac);},
-                "Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen");
-        Assertions.assertEquals("Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
-        daoFactoryMockedStatic.verify(DaoFactory::kupacDAO);
-        Mockito.verify(kupacManager).add(kupac);
-        daoFactoryMockedStatic.close();
+       KupacManager km = new KupacManager();
+       ProdavacManager pm = new ProdavacManager();
+       KarteManager kam = new KarteManager();
+       Prodavac p = pm.getById(1);
+       Karte k = kam.getById(1);
+       Kupac novi = new Kupac(32,"Boris Johnson","boris@mail.net","","",p,k);
+       KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
+           km.add(novi);
+       },"Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen");
+       Assertions.assertEquals("Ne moze se dodati kupac sa ID-em. ID je automatski dodijeljen",exception.getMessage());
     }
 
 
