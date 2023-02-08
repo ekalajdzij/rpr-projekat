@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.dao.KarteDAOSQLImplementation;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,12 +31,22 @@ public class KarteManagerTest {
         karteDAOSQLImplementationMock = Mockito.mock(KarteDAOSQLImplementation.class);
 
     }
+    @Test
+    public void mockitoTest() throws KarteException {
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(1);
+        Mockito.when(karteManager.getById(1)).thenReturn(new Karte(100,"probaMockito","datum","adresa",p,22.5));
+        Karte expected = new Karte(100,"probaMockito","datum","adresa",p,22.5);
+        Karte actual = karteManager.getById(1);
+        Assertions.assertEquals(expected.toString(),actual.toString());
+
+    }
 
     @Test
     void validateVrstuKarteTest() {
         String ispravno = "Film: U zemlji krvi i meda";
         try {
-            Mockito.doCallRealMethod().when(karteManager).validateKarteVrsta(ispravno);
+            karteManager.validateKarteVrsta(ispravno);
         } catch(KarteException e) {
             e.printStackTrace();
             Assertions.assertTrue(false);
@@ -43,63 +54,55 @@ public class KarteManagerTest {
     }
 
     @Test
-    void updateTest() {
-        try {
-            Prodavac p = Mockito.mock(Prodavac.class);
-            ProdavacManager pmanager = Mockito.mock(ProdavacManager.class);
-            p = pmanager.getById(1);
-            karta = new Karte(2, "Fudbalska utakmica: Argentina - Hrvatska", "13.12.2022", "Lusail Stadium, Doha", p, 1200.50);
-            Mockito.doCallRealMethod().when(karteManager).update(karta);
-        } catch(KarteException e) {
-            e.printStackTrace();
-            Assertions.assertTrue(false);
-        }
+    public void updateTest() throws KarteException {
+        KarteManager km = new KarteManager();
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(1);
+        Karte azurirati = new Karte(1,"Film: Babylon", "09.02.2023", "Cinestar, New York", p, 33.5);
+        km.update(azurirati);
+
+        Assertions.assertEquals("09.02.2023", km.getById(1).getDatum());
+        Assertions.assertEquals("Film: Babylon",km.getById(1).getVrsta());
+
+
     }
 
     @Test
-    void deleteTest() throws KarteException {
-        Mockito.doCallRealMethod().when(karteManager).delete(2);
+    public void deleteTest() throws KarteException {
+        KarteManager km = new KarteManager();
         KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
-            karteManager.delete(2);}, "Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.");
+            km.delete(2);}, "Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.");
         Assertions.assertEquals("Cannot delete Karte which is related to Kupac. First delete related Kupac before deleting Karte.",exception.getMessage());
     }
     @Test
-    void getByIdTest() {
-        try {
-            Mockito.doCallRealMethod().when(karteManager).getById(1);
-        }catch(KarteException e) {
-            e.printStackTrace();
-            Assertions.assertTrue(false);
-        }
-    }
-    @Test
-    void add() throws KarteException {
-        Prodavac p = Mockito.mock(Prodavac.class);
-        ProdavacManager pmanager = Mockito.mock(ProdavacManager.class);
-        p = pmanager.getById(1);
-        /*
-        Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
-         */
-        MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
-        daoFactoryMockedStatic.when(DaoFactory::karteDAO).thenReturn(karteDAOSQLImplementationMock);
-        when(DaoFactory.karteDAO().getAll()).thenReturn(karte);
-        /*
-        Bacit će se izuzetak jer instanca Karte.java class ima value za id
-         */
-        karta = new Karte(12,"","","",p,0.0);
-        Mockito.doCallRealMethod().when(karteManager).add(karta);
-        KarteException karteException = Assertions.assertThrows(KarteException.class, () -> {
-                    karteManager.add(karta);
-                },
-                "Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen");
-        Assertions.assertEquals("Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen", karteException.getMessage());
-        daoFactoryMockedStatic.verify(DaoFactory::karteDAO);
-        Mockito.verify(karteManager).add(karta);
-        daoFactoryMockedStatic.close();
+    public void getByIdTest() throws KarteException {
+       KarteManager km = new KarteManager();
+       Karte dobijena = km.getById(7);
+       ProdavacManager pm = new ProdavacManager();
+       Prodavac p = pm.getById(12);
+       Karte stvarna = new Karte(7,"Fudbalska utakmica: Arsenal - Brentford", "11.02.2023", "Emirates Stadium, London",p, 200.0);
+       Assertions.assertEquals(stvarna.getId(),dobijena.getId());
+       Assertions.assertEquals(stvarna.getVrsta(),dobijena.getVrsta());
+       Assertions.assertEquals(stvarna.getDatum(),dobijena.getDatum());
+       Assertions.assertEquals(stvarna.getAdresa(),dobijena.getAdresa());
+       Assertions.assertEquals(stvarna.getProdavac().getId(),dobijena.getProdavac().getId());
+       Assertions.assertEquals(stvarna.getCijena(),dobijena.getCijena());
+
 
     }
     @Test
-    void getAllTest() throws KarteException {
+    public void add() throws KarteException {
+       KarteManager km = new KarteManager();
+       ProdavacManager pm = new ProdavacManager();
+       Prodavac p = pm.getById(11);
+       Karte nova = new Karte(21,"","","",p,0.0);
+       KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
+           km.add(nova);}, "Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen");
+       Assertions.assertEquals("Ne moze se dodati karta sa ID-em. ID je automatski dodijeljen", exception.getMessage());
+
+    }
+    @Test
+    public void getAllTest() throws KarteException {
         KarteManager manager = new KarteManager();
         List<String> imena = manager.getAllKarte();
         Assertions.assertEquals("Fudbalska utakmica: Milan - Inter",imena.get(5));
