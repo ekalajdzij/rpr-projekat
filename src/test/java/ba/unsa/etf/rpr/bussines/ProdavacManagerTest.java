@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.dao.ProdavacDAOSQLImplementation;
 import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +40,18 @@ public class ProdavacManagerTest {
     }
 
     @Test
+    public void validateNeispravnoImeProdavcaTest() {
+        String neispravno = "xy";
+        ProdavacManager pm = new ProdavacManager();
+        KarteException exception = Assertions.assertThrows(KarteException.class, () -> {
+            pm.validateProdavacIme(neispravno);
+        },"Ime prodavca mora biti izmedju 3 i 50 karaktera!");
+        Assertions.assertEquals("Ime prodavca mora biti izmedju 3 i 50 karaktera!", exception.getMessage());
+
+
+    }
+
+    @Test
     public void updateTest() {
         try {
             prodavac = new Prodavac(10,"Elvis John Presley", "+33 123 444 55", "kraljiliking@mail");
@@ -47,6 +60,14 @@ public class ProdavacManagerTest {
             e.printStackTrace();
             Assertions.assertTrue(false);
         }
+    }
+
+    @Test
+    public void getImeTest() throws KarteException {
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(8);
+        String expected = "Emir Kalajdzija";
+        Assertions.assertEquals(expected, p.getIme());
     }
     @Test
     public void deleteTest() throws KarteException {
