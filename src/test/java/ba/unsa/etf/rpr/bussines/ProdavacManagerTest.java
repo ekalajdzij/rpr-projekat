@@ -56,12 +56,12 @@ public class ProdavacManagerTest {
         Assertions.assertEquals("Cannot delete Prodavac which is related to Karte. First delete related Karte before deleting Prodavac",exception.getMessage());
     }
     @Test
-    void getIdTest() throws KarteException {
+    public void getIdTest() throws KarteException {
         ProdavacManager pm = new ProdavacManager();
         Assertions.assertEquals(1,pm.getId("John Smith"));
     }
     @Test
-    void add() throws KarteException {
+    public void add() throws KarteException {
         /*
         Definisemo kada cemo da mock-ujemo daoFactory i sta treba da nam vrati
          */
