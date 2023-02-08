@@ -70,6 +70,13 @@ public class ProdavacManagerTest {
         Assertions.assertEquals(expected, p.getIme());
     }
     @Test
+    public void getTelefonTest() throws KarteException {
+        ProdavacManager pm = new ProdavacManager();
+        Prodavac p = pm.getById(8);
+        String expected = "+32  33 222 111";
+
+    }
+    @Test
     public void deleteTest() throws KarteException {
         Mockito.doCallRealMethod().when(prodavacManager).delete(12);
         KarteException exception = Assertions.assertThrows(KarteException.class, ()-> {
