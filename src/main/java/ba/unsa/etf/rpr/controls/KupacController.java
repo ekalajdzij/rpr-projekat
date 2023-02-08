@@ -1,4 +1,4 @@
-package controls;
+package ba.unsa.etf.rpr.controls;
 
 import ba.unsa.etf.rpr.bussines.KarteManager;
 import ba.unsa.etf.rpr.bussines.KupacManager;
