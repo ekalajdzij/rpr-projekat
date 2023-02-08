@@ -1,4 +1,4 @@
-package controls;
+package ba.unsa.etf.rpr.controls;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -12,7 +12,7 @@ public class UbacioKartuController {
 
     @FXML
     void initialize() throws FileNotFoundException {
-        Image image = new Image(new FileInputStream("src/main/resources/checkpoint.jpg"));
+        Image image = new Image(getClass().getResourceAsStream("/checkpoint.jpg"));
         fieldImage.setImage(image);
     }
 
