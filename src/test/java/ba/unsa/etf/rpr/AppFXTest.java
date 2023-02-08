@@ -81,6 +81,10 @@ public class AppFXTest {
 
     }
 
+    /**
+     * Test for some set methods of Karte and Kupac dao classes
+     * @throws KarteException if an error occur
+     */
     @Test
     public void test5() throws KarteException {
         KupacManager km = new KupacManager();
