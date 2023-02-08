@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Karte;
 import ba.unsa.etf.rpr.domain.Kupac;
 import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,14 +68,12 @@ public class KupacManagerTest {
         Assertions.assertEquals("Karim Smith", kupci.get(0).getIme());
     }
     @Test
-    public void deleteTest() {
-        try {
-            kupac = kupacManager.getById(7);
-            Mockito.doCallRealMethod().when(kupacManager).delete(7);
-        } catch(KarteException e) {
-            e.printStackTrace();
-            Assertions.assertTrue(false);
-        }
+    public void getImeKupcaTest() throws KarteException {
+        KupacManager km = new KupacManager();
+        Kupac k = km.getById(6);
+        String expected = "John English";
+        Assertions.assertEquals(expected,k.getIme());
+
     }
     @Test
     public void updateTest() throws KarteException {
