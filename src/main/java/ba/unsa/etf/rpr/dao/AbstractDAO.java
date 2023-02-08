@@ -41,7 +41,7 @@ public abstract class  AbstractDAO<T extends Idable> implements DAO<T> {
      */
     private static void createConnection() {
         if(AbstractDAO.connection == null) {
-            try (InputStream input = new FileInputStream("login.properties")) {
+            try (InputStream input = new FileInputStream("src/main/resources/login.properties")) {
                 Properties prop = new Properties();
                 prop.load(input);
                 String url = prop.getProperty("db.url");

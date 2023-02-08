@@ -17,7 +17,7 @@ public class Database {
 
     public static Connection getConnection() {
         Connection connection = null;
-        try (InputStream input = new FileInputStream("login.properties")) {
+        try (InputStream input = new FileInputStream("src/main/resources/login.properties")) {
             Properties prop = new Properties();
             prop.load(input);
             url = prop.getProperty("db.url");
