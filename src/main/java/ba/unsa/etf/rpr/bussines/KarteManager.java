@@ -19,7 +19,6 @@ public class KarteManager {
     }
 
     public void delete(int id) throws KarteException {
-        //DaoFactory.karteDAO().delete(id);
         try {
             DaoFactory.karteDAO().delete(id);
         } catch (KarteException e) {
