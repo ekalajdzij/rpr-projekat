@@ -114,7 +114,5 @@ public class ProdavacManagerTest {
         Assertions.assertEquals(expected2,p.getTelefon());
         Assertions.assertEquals(expected3,p.getMail());
 
-
-
     }
 }
