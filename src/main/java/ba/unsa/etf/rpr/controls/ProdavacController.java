@@ -1,9 +1,7 @@
-package controls;
+package ba.unsa.etf.rpr.controls;
 
 import ba.unsa.etf.rpr.bussines.ProdavacManager;
-import ba.unsa.etf.rpr.dao.Database;
 import ba.unsa.etf.rpr.domain.Prodavac;
-import ba.unsa.etf.rpr.dao.ProdavacDAO;
 import ba.unsa.etf.rpr.dao.ProdavacDAOSQLImplementation;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.event.ActionEvent;
