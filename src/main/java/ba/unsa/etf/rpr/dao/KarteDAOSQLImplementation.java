@@ -50,6 +50,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
             k.setDatum(rs.getString("datum"));
             k.setAdresa(rs.getString("adresa"));
             k.setCijena(rs.getDouble("cijena"));
+            k.setKolicina(rs.getInt("kolicina"));
             return k;
         } catch (SQLException e) {
             throw new KarteException(e.getMessage(), e);
@@ -62,6 +63,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
         row.put("datum",object.getDatum());
         row.put("adresa",object.getAdresa());
         row.put("cijena",object.getCijena());
+        row.put("kolicina",object.getKolicina());
         return row;
     }
 
@@ -69,7 +71,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
     @Override
     public Karte getById(int id) throws KarteException{
         Karte karta = null;
-        String sql = "SELECT id, vrsta, datum, adresa, cijena, Prodavac_id FROM Karte WHERE id = ?";
+        String sql = "SELECT id, vrsta, datum, adresa, cijena, Prodavac_id, kolicina FROM Karte WHERE id = ?";
         try {
             PreparedStatement ps = this.getConnection().prepareStatement(sql);
             ps.setObject(1, id);
@@ -80,9 +82,10 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
                 String datum = rs.getString("datum");
                 String adresa = rs.getString("adresa");
                 Double cijena = rs.getDouble("cijena");
+                Integer kolicina = rs.getInt("kolicina");
                 ProdavacDAO prodavacDAO = new ProdavacDAOSQLImplementation();
                 Prodavac prodavac = prodavacDAO.getById(rs.getInt("Prodavac_id"));
-                karta = new Karte(oid, vrsta, datum, adresa, prodavac, cijena);
+                karta = new Karte(oid, vrsta, datum, adresa, prodavac, cijena, kolicina);
             }
             return karta;
         } catch(SQLException e) {
@@ -93,7 +96,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
     @Override
     public List<Karte> getAll() throws KarteException{
         List<Karte> karte = new ArrayList<>();
-        String sql = "SELECT id,vrsta,datum,adresa,cijena,Prodavac_id FROM Karte";
+        String sql = "SELECT id,vrsta,datum,adresa,cijena,Prodavac_id,kolicina FROM Karte";
         try {
             PreparedStatement stmt = this.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.executeQuery(sql);
@@ -103,9 +106,10 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
                 String datum = rs.getString("datum");
                 String adresa = rs.getString("adresa");
                 Double cijena = rs.getDouble("cijena");
+                Integer kolicina = rs.getInt("kolicina");
                 ProdavacManager prodavacManager = new ProdavacManager();
                 Prodavac prodavac = prodavacManager.getById(rs.getInt("Prodavac_id"));
-                Karte karta = new Karte(oid, vrsta, datum, adresa, prodavac, cijena);
+                Karte karta = new Karte(oid, vrsta, datum, adresa, prodavac, cijena, kolicina);
                 karte.add(karta);
             }
             return karte;
@@ -116,7 +120,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
 
     @Override
     public Karte add(Karte karte) throws KarteException {
-        String sql = "INSERT INTO Karte (id, vrsta, datum, adresa, cijena, Prodavac_id) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Karte (id, vrsta, datum, adresa, cijena, Prodavac_id, kolicina) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = this.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setObject(1,karte.getId());
@@ -125,6 +129,7 @@ public class KarteDAOSQLImplementation extends AbstractDAO<Karte> implements Kar
             ps.setObject(4,karte.getAdresa());
             ps.setObject(5, karte.getCijena());
             ps.setObject(6,karte.getProdavac().getId());
+            ps.setObject(7,karte.getKolicina());
             ps.executeUpdate();
             return karte;
         }
