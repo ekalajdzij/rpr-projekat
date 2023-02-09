@@ -25,6 +25,7 @@ public class KarteController {
     public TextArea datumDogadjajaArea;
 
     public KarteModel model = new KarteModel();
+    public int idOdabrane;
 
     private KarteManager karteManager = new KarteManager();
 
@@ -45,6 +46,7 @@ public class KarteController {
                 adresaDogadjajaArea.setText("");
             } else {
                 model = new KarteModel(newValue);
+                idOdabrane = newValue.getId();
                 datumDogadjajaArea.textProperty().bindBidirectional(model.datumProperty());
                 adresaDogadjajaArea.textProperty().bindBidirectional(model.adresaProperty());
 
@@ -53,14 +55,23 @@ public class KarteController {
         });
     }
 
-    public void okButtonClick(ActionEvent actionEvent) throws IOException {
+    public void okButtonClick(ActionEvent actionEvent) throws IOException, KarteException {
         if (choiceBox.getValue() == null || fieldKolicina.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Pogreška");
             alert.setHeaderText("Greška pri unosu podataka! ");
             alert.setContentText("Molimo Vas unesite podatke o kupovini ponovo!");
             alert.showAndWait();
-        } else {
+        }
+        else if (Integer.parseInt(fieldKolicina.getText()) > karteManager.getById(idOdabrane).getKolicina()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Pogreška");
+            alert.setHeaderText("Unijeli ste količinu koja je veća od broja karata za kupovinu! ");
+            alert.setContentText("Molimo Vas unesite podatke o kupovini ponovo!");
+            alert.showAndWait();
+
+        }
+        else {
             Stage stage = new Stage();
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupac.fxml"));
             KupacController kupacController = new KupacController(choiceBox.getSelectionModel().getSelectedItem(),Integer.valueOf(fieldKolicina.getText()));

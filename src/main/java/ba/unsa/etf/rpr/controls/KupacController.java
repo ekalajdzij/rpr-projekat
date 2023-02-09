@@ -72,7 +72,7 @@ public class KupacController {
             kupacManager.add(k);
 
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/fxml/kupio.fxml"));
-            KupioController kupioController = new KupioController(vrsta_odabrane_karte, kolicina, cijena.toString());
+            KupioController kupioController = new KupioController(vrsta_odabrane_karte, kolicina, cijena.toString(),id_karte);
             fxmlloader.setController(kupioController);
 
             Scene scene = new Scene(fxmlloader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);

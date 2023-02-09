@@ -23,6 +23,7 @@ public class ProdajaController {
     public TextField fieldVrsta;
     public TextField fieldDatum;
     public TextField fieldAdresa;
+    public TextField fieldKolicina;
     private String ime;
 
     public ProdajaController(String ime) {
@@ -48,6 +49,7 @@ public class ProdajaController {
             String vrsta = fieldVrsta.getText();
             String datum = fieldDatum.getText();
             String adresa = fieldAdresa.getText();
+            Integer kolicina = Integer.parseInt(fieldKolicina.getText());
 
             ProdavacManager prodavacManager = new ProdavacManager();
             ProdavacDAOSQLImplementation novi = new ProdavacDAOSQLImplementation();
@@ -57,7 +59,7 @@ public class ProdajaController {
             int p_id = prodavacManager.getId(ime);
             Prodavac prodavac = prodavacManager.getById(p_id);
 
-            Karte k = new Karte(0,vrsta,datum,adresa,prodavac,cijena);
+            Karte k = new Karte(0,vrsta,datum,adresa,prodavac,cijena,kolicina);
             karteManager.add(k);
 
             Stage stage = new Stage();
