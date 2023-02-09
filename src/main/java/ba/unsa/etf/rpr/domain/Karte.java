@@ -11,9 +11,10 @@ public class Karte implements Idable{
     private String adresa;
     private Prodavac prodavac;
     private Double cijena;
+    private Integer kolicina;
 
-    public Karte(int id, String vrsta, String datum, String adresa, Prodavac prodavac_id, Double cijena ) {
-        this.id = id;   this.vrsta = vrsta; this.datum = datum; this.adresa = adresa;
+    public Karte(int id, String vrsta, String datum, String adresa, Prodavac prodavac_id, Double cijena,Integer kolicina) {
+        this.id = id;   this.vrsta = vrsta; this.datum = datum; this.adresa = adresa; this.kolicina = kolicina;
         this.prodavac = prodavac_id;
         this.cijena = cijena;
     }
@@ -67,9 +68,17 @@ public class Karte implements Idable{
         this.datum = datum;
     }
 
+    public void setKolicina(Integer kolicina) {
+        this.kolicina = kolicina;
+    }
+
+    public Integer getKolicina() {
+        return this.kolicina;
+    }
+
     @Override
     public String toString() {
-        return vrsta;
+        return vrsta + " Kolicina: "+kolicina;
     }
 
 }
