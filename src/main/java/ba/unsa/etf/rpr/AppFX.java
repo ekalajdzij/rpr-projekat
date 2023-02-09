@@ -1,6 +1,10 @@
 package ba.unsa.etf.rpr;
 
 
+import ba.unsa.etf.rpr.bussines.KarteManager;
+import ba.unsa.etf.rpr.bussines.ProdavacManager;
+import ba.unsa.etf.rpr.domain.Karte;
+import ba.unsa.etf.rpr.domain.Prodavac;
 import ba.unsa.etf.rpr.exceptions.KarteException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
