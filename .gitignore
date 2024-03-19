@@ -1,4 +1,4 @@
 # Project exclude paths
 /target/
 src/main/resources/login.properties
-/script-dir
+/script-dir/
